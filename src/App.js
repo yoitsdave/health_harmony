@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import FoodEntry from './pages/foodEntry.js';
+import SleepEntry from './pages/sleepEntry.js';
+import WorkoutEntry from './pages/workoutEntry.js';
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
