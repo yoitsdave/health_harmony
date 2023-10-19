@@ -4,13 +4,18 @@ import WorkoutEntry from "./pages/workoutEntry.js";
 
 import AppBar from "./components/appBar.js";
 
-import { HashRouter, Routes, Route } from "react-router-dom";
+import * as React from "react";
+
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+
 import Typography from "@mui/material/Typography";
 
 function App() {
+  const [header, setHeader] = React.useState(1);
+
   return (
     <HashRouter>
-      <AppBar>
+      <AppBar page={header}>
         <Routes>
           <Route
             path="/notifications"
@@ -39,7 +44,10 @@ function App() {
             }
           />
 
-          <Route path="/foodplan" element={<FoodEntry />} />
+          <Route
+            path="/foodplan"
+            element={<FoodEntry setHeader={setHeader} />}
+          />
 
           <Route path="/workoutplan" element={<WorkoutEntry />} />
 

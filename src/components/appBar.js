@@ -11,7 +11,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
-export default function MenuAppBar({ children }) {
+export default function MenuAppBar({ children, page }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuShown, setMenuShown] = React.useState(false);
   const [settingsShown, setSettingsShown] = React.useState(false);
@@ -82,7 +82,7 @@ export default function MenuAppBar({ children }) {
             <MenuItem onClick={handleLink("reset")}>Reset</MenuItem>
           </Menu>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            HealthHarmony
+            {page}
           </Typography>
           {
             <div>
@@ -131,6 +131,8 @@ export default function MenuAppBar({ children }) {
           }
         </Toolbar>
       </AppBar>
+
+      <Toolbar />
 
       {children}
     </Box>
