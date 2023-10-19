@@ -1,96 +1,88 @@
-import logo from './logo.svg';
-import './App.css';
-import * as React from 'react';
+import FoodEntry from "./pages/foodEntry.js";
+import SleepEntry from "./pages/sleepEntry.js";
+import WorkoutEntry from "./pages/workoutEntry.js";
 
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import AppBar from "./components/appBar.js";
 
-import FoodEntry from './pages/foodEntry.js';
-import SleepEntry from './pages/sleepEntry.js';
-import WorkoutEntry from './pages/workoutEntry.js';
-
-
-function CustomTabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 function App() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
-    <div className="App">
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Homepage" {...a11yProps(0)} />
-          <Tab label="PersonalData" {...a11yProps(1)} />
-          <Tab label="FoodEntry" {...a11yProps(2)} />
-          <Tab label="WorkoutEntry" {...a11yProps(3)} />
-          <Tab label="SleepEntry" {...a11yProps(4)} />
-          <Tab label="VisualSummary" {...a11yProps(5)} />
-          <Tab label="Calendar" {...a11yProps(6)} />
-        </Tabs>
-      </Box>
+    <BrowserRouter>
+      <AppBar>
+        <Routes>
+          <Route
+            path="/notifications"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Notifications
+              </Typography>
+            }
+          />
 
-      <CustomTabPanel value={value} index={0}>
-        Item One
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Item Two
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
-        <FoodEntry/>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        Item Four
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={4}>
-        Item Five
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={5}>
-        Item Six
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={6}>
-        Item Seven
-      </CustomTabPanel>
+          <Route
+            path="/reset"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                reset
+              </Typography>
+            }
+          />
 
-    </div>
+          <Route
+            path="/personaldataentry"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                personal data entry
+              </Typography>
+            }
+          />
+
+          <Route path="/foodplan" element={<FoodEntry />} />
+
+          <Route path="/workoutplan" element={<WorkoutEntry />} />
+
+          <Route path="/sleepplan" element={<SleepEntry />} />
+
+          <Route
+            path="/summaryplot"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                summary plots
+              </Typography>
+            }
+          />
+
+          <Route
+            path="/calendarview"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                calendar view
+              </Typography>
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                homepage
+              </Typography>
+            }
+          />
+
+          <Route
+            path="*"
+            element={
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                404 get outta here
+              </Typography>
+            }
+          />
+        </Routes>
+      </AppBar>
+    </BrowserRouter>
   );
 }
 
