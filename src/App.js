@@ -4,12 +4,12 @@ import WorkoutEntry from "./pages/workoutEntry.js";
 
 import AppBar from "./components/appBar.js";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppBar>
         <Routes>
           <Route
@@ -82,7 +82,7 @@ function App() {
           />
         </Routes>
       </AppBar>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
