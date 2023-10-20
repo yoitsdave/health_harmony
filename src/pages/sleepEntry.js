@@ -56,12 +56,12 @@ function storeSleep(start,end,quality) {
 }
 
 
-function SleepEntry({ setHeader }) {
+function SleepEntry() {
     const [start, setStart] = React.useState(dayjs());
     const [end, setEnd] = React.useState(dayjs());
     const [quality, setQuality] = React.useState("");
 
-    React.useEffect(() => setHeader("Enter Sleep Details"))
+    
 
 
     return(
@@ -102,7 +102,7 @@ function SleepEntry({ setHeader }) {
               bottom: 16,
               right: 16,
             }}
-            onClick={() => storeSleep(start, end, quality, dreams)}
+            onClick={() => storeSleep(start, end, quality)}
           >
             <AddIcon />
           </Fab>
