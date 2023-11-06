@@ -2,6 +2,7 @@ import FoodEntry from "./pages/foodEntry.js";
 import CalendarView from "./pages/calendarView.js";
 import SleepEntry from "./pages/sleepEntry.js";
 import WorkoutEntry from "./pages/workoutEntry.js";
+import DataEntry from "./pages/dataEntry.js"
 
 import AppBar from "./components/appBar.js";
 
@@ -40,14 +41,10 @@ function App() {
               }
             />
 
-            <Route
-              path="/personaldataentry"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  personal data entry
-                </Typography>
-              }
-            />
+          <Route
+            path="/personaldataentry"
+            element={ <DataEntry setHeader={setHeader} />}
+          />
 
             <Route
               path="/foodplan"
