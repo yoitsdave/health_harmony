@@ -14,6 +14,7 @@ import {
 
 import PlanningDateCalendar from "../components/planningDateCalendar.js";
 import FoodEntryDialogue from "../components/foodEntryDialogue.js";
+import WorkoutEntryDialogue from "../pages/workoutEntry.js";
 
 import { ContainerGrid, GridItem } from "../components/gridItems.js";
 import { MealSummary, WorkoutSummary } from "../components/daySummary.js";
@@ -30,6 +31,7 @@ function CalendarView({ setHeader }) {
   const [plannedWorkouts, setPlannedWorkouts] = React.useState([]);
 
   const [foodEntryOpen, setFoodEntryOpen] = React.useState(false);
+  const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }} disableGutters>
