@@ -1,5 +1,16 @@
-import { Box, Fab, List } from "@mui/material";
-import { Add as AddIcon } from "@mui/icons-material";
+import {
+  Box,
+  Fab,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+} from "@mui/material";
+import {
+  Add as AddIcon,
+  FitnessCenter as DumbellIcon,
+  Fastfood as FoodIcon,
+  Bedtime as BedtimeIcon,
+} from "@mui/icons-material";
 
 import PlanningDateCalendar from "../components/planningDateCalendar.js";
 import FoodEntryDialogue from "../components/foodEntryDialogue.js";
@@ -47,18 +58,32 @@ function CalendarView({ setHeader }) {
         date={selectedDate}
       />
 
-      <Fab
-        color="primary"
-        aria-label="add"
-        sx={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
-        }}
-        onClick={() => setFoodEntryOpen(true)}
+      <SpeedDial
+        sx={{ position: "absolute", bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+        ariaLabel="Plan / Record"
       >
-        <AddIcon />
-      </Fab>
+        <SpeedDialAction
+          key="meal"
+          icon={<FoodIcon />}
+          tooltipTitle="Plan or Record Meal"
+          onClick={() => setFoodEntryOpen(true)}
+        />
+
+        <SpeedDialAction
+          key="workout"
+          icon={<DumbellIcon />}
+          onClick={() => alert("record workout not supported :(")}
+          tooltipTitle="Plan or Record Workout"
+        />
+
+        <SpeedDialAction
+          key="sleep"
+          icon={<BedtimeIcon />}
+          onClick={() => alert("record sleep not supported :(")}
+          tooltipTitle="Plan or Record Sleep"
+        />
+      </SpeedDial>
     </Box>
   );
 }
