@@ -2,6 +2,7 @@ import { Box, Fab, List } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 
 import PlanningDateCalendar from "../components/planningDateCalendar.js";
+import FoodEntryDialogue from "../components/foodEntryDialogue.js";
 
 import { ContainerGrid, GridItem } from "../components/gridItems.js";
 import { MealSummary, WorkoutSummary } from "../components/daySummary.js";
@@ -16,6 +17,8 @@ function CalendarView({ setHeader }) {
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
   const [plannedMeals, setPlannedMeals] = React.useState([]);
   const [plannedWorkouts, setPlannedWorkouts] = React.useState([]);
+
+  const [foodEntryOpen, setFoodEntryOpen] = React.useState(false);
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }} disableGutters>
@@ -38,6 +41,12 @@ function CalendarView({ setHeader }) {
         </GridItem>
       </ContainerGrid>
 
+      <FoodEntryDialogue
+        open={foodEntryOpen}
+        setOpen={setFoodEntryOpen}
+        date={selectedDate}
+      />
+
       <Fab
         color="primary"
         aria-label="add"
@@ -46,6 +55,7 @@ function CalendarView({ setHeader }) {
           bottom: 16,
           right: 16,
         }}
+        onClick={() => setFoodEntryOpen(true)}
       >
         <AddIcon />
       </Fab>

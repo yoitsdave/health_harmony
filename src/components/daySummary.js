@@ -22,9 +22,10 @@ function MealSummary({ plannedMeals }) {
                 <CardContent>
                   <Typography gutterBottom>{meal.name}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Calories: {meal.calories}
+                    {meal.datetime.format("hh:mm a")}
                   </Typography>
                   <Typography variant="body2">
+                    Calories: {meal.calories} <br />
                     Protein: {meal.protein} <br />
                     Carbs: {meal.carbs} <br />
                     Fat: {meal.fat} <br />
@@ -35,7 +36,7 @@ function MealSummary({ plannedMeals }) {
                   <Button
                     variant="contained"
                     endIcon={<EditIcon />}
-                    onClick={() => alert("hi!")}
+                    onClick={() => alert("edit not supported :(")}
                   >
                     Edit
                   </Button>
@@ -68,7 +69,10 @@ function WorkoutSummary({ plannedWorkouts }) {
                 <CardContent>
                   <Typography gutterBottom>{workout.name}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Calories: {workout.calories}
+                    {workout.datetime.format("hh:mm a")}
+                  </Typography>
+                  <Typography variant="body2">
+                    Calories: {workout.calories} <br />
                   </Typography>
                 </CardContent>
 
@@ -76,7 +80,7 @@ function WorkoutSummary({ plannedWorkouts }) {
                   <Button
                     variant="contained"
                     endIcon={<EditIcon />}
-                    onClick={() => alert("hi!")}
+                    onClick={() => alert("edit is currently not supported :(")}
                   >
                     Edit
                   </Button>

@@ -76,7 +76,7 @@ function storeMeal(name, protein, carbs, fat, calories, datetime) {
   }
 }
 
-function FoodEntry({ setHeader }) {
+function FoodEntry({ setHeader, id }) {
   // This is the page for planning a future meal (or meals!)
 
   // datetime - https://mui.com/x/react-date-pickers/date-time-picker/
