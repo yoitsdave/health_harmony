@@ -16,7 +16,7 @@ function GridItem({ children }) {
       {children}
     </Grid>
   );
-} 
+}
 
 function InnerGrid({ children }) {
   return (

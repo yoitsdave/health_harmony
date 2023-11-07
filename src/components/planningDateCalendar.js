@@ -21,13 +21,14 @@ function ServerDay({
 }) {
   const dayOfMeals = meals.filter((meal) => {
     return (
-      meal.datetime.date() == day.date() && meal.datetime.month() == day.month()
+      dayjs(meal.datetime).date() == day.date() &&
+      dayjs(meal.datetime).month() == day.month()
     );
   });
   const dayOfWorkouts = workouts.filter((workout) => {
     return (
-      workout.datetime.date() == day.date() &&
-      workout.datetime.month() == day.month()
+      dayjs(workout.datetime).date() == day.date() &&
+      dayjs(workout.datetime).month() == day.month()
     );
   });
 
@@ -49,7 +50,6 @@ function ServerDay({
         outsideCurrentMonth={outsideCurrentMonth}
         day={day}
         onClick={(event) => {
-          console.log(dayOfMeals);
           setPlannedMeals(dayOfMeals);
           setPlannedWorkouts(dayOfWorkouts);
         }}
@@ -70,15 +70,45 @@ function PlanningDateCalendar({
     []
   );
 
+  let tempMeals = localStorage.getItem("meals");
+  let tempWorkouts = localStorage.getItem("workouts");
+
+  if (tempMeals == null || tempMeals == "") {
+    localStorage.setItem("meals", JSON.stringify([]));
+  }
+  if (tempWorkouts == null || tempWorkouts == "") {
+    localStorage.setItem("workouts", JSON.stringify([]));
+  }
+
+  const meals = JSON.parse(localStorage.getItem("meals"));
+  const workouts = JSON.parse(localStorage.getItem("workouts"));
+
+  React.useEffect(() => {
+    const todayMeals = meals.filter((meal) => {
+      return (
+        dayjs(meal.datetime).date() == dayjs().date() &&
+        dayjs(meal.datetime).month() == dayjs().month()
+      );
+    });
+    const todayWorkouts = workouts.filter((workout) => {
+      return (
+        dayjs(workout.datetime).date() == dayjs().date() &&
+        dayjs(workout.datetime).month() == dayjs().month()
+      );
+    });
+    setPlannedMeals(todayMeals);
+    setPlannedWorkouts(todayWorkouts);
+  });
+
   const fetchHighlightedDays = () => {
     setFoodHighlightedDays(
       meals.map((meal) => {
-        return meal.datetime.date();
+        return dayjs(meal.datetime).date();
       })
     );
     setWorkoutHighlightedDays(
       workouts.map((workout) => {
-        return workout.datetime.date();
+        return dayjs(workout.datetime).date();
       })
     );
 
@@ -93,65 +123,6 @@ function PlanningDateCalendar({
     setIsLoading(true);
     fetchHighlightedDays(date);
   };
-
-  const meals = [
-    {
-      id: 1,
-      name: "meat",
-      protein: 4,
-      carbs: 3,
-      fat: 4,
-      calories: 150,
-      datetime: dayjs("2023-11-01", "YYYY-MM-DD"),
-    },
-    {
-      id: 2,
-      name: "stew",
-      protein: 4,
-      carbs: 3,
-      fat: 4,
-      calories: 150,
-      datetime: dayjs("2023-11-03", "YYYY-MM-DD"),
-    },
-    {
-      id: 3,
-      name: "sammy",
-      protein: 4,
-      carbs: 3,
-      fat: 4,
-      calories: 150,
-      datetime: dayjs("2023-11-05", "YYYY-MM-DD"),
-    },
-    {
-      id: 4,
-      name: "sammy 2",
-      protein: 4,
-      carbs: 3,
-      fat: 4,
-      calories: 150,
-      datetime: dayjs("2023-11-05", "YYYY-MM-DD"),
-    },
-  ];
-  const workouts = [
-    {
-      id: 1,
-      name: "lift",
-      calories: 150,
-      datetime: dayjs("2023-11-01", "YYYY-MM-DD"),
-    },
-    {
-      id: 2,
-      name: "run",
-      calories: 150,
-      datetime: dayjs("2023-11-03", "YYYY-MM-DD"),
-    },
-    {
-      id: 3,
-      name: "swim",
-      calories: 150,
-      datetime: dayjs("2023-11-05", "YYYY-MM-DD"),
-    },
-  ];
 
   return (
     <Box>

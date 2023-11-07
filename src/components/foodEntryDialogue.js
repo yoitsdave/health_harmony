@@ -76,11 +76,29 @@ function storeMeal(name, protein, carbs, fat, calories, datetime) {
   const scheduled = dayjs(datetime);
   const diff = now.diff(scheduled, "minute");
 
-  if (diff >= -5) {
-    alert("Setting a meal that's been already confirmed!");
-  } else {
-    alert("Setting a meal that will need future confirmation!");
+  // if (diff >= -5) {
+  //   alert("Setting a meal that's been already confirmed!");
+  // } else {
+  //   alert("Setting a meal that will need future confirmation!");
+  // }
+  let meals = localStorage.getItem("meals");
+
+  if (meals == null || meals == "") {
+    localStorage.setItem("meals", JSON.stringify([]));
   }
+  meals = JSON.parse(localStorage.getItem("meals"));
+
+  const newMeal = {
+    id: meals.length,
+    name: name,
+    protein: protein,
+    carbs: carbs,
+    fat: fat,
+    calories: calories,
+    datetime: datetime,
+  };
+
+  localStorage.setItem("meals", JSON.stringify(meals.concat([newMeal])));
 }
 
 function FoodEntryDialogue({ open, setOpen, date }) {

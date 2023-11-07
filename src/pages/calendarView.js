@@ -24,7 +24,9 @@ import * as React from "react";
 import dayjs from "dayjs";
 
 function CalendarView({ setHeader }) {
-  React.useEffect(() => setHeader("Calendar View"));
+  React.useEffect(() => {
+    setHeader("Calendar View");
+  });
 
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
   const [plannedMeals, setPlannedMeals] = React.useState([]);
@@ -34,7 +36,7 @@ function CalendarView({ setHeader }) {
   const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
 
   return (
-    <Box sx={{ height: "90vh", overflow: "auto" }} disableGutters>
+    <Box sx={{ height: "90vh", overflow: "auto" }}>
       <ContainerGrid sx={{ height: "90vh" }}>
         <GridItem md={4}>
           <PlanningDateCalendar

@@ -7,6 +7,8 @@ import CardContent from "@mui/material/CardContent";
 
 import { Edit as EditIcon } from "@mui/icons-material";
 
+import dayjs from "dayjs";
+
 function MealSummary({ plannedMeals }) {
   return (
     <ContainerGrid>
@@ -22,7 +24,7 @@ function MealSummary({ plannedMeals }) {
                 <CardContent>
                   <Typography gutterBottom>{meal.name}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {meal.datetime.format("hh:mm a")}
+                    {dayjs(meal.datetime).format("hh:mm a")}
                   </Typography>
                   <Typography variant="body2">
                     Calories: {meal.calories} <br />
