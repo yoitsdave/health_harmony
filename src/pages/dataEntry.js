@@ -265,13 +265,13 @@ function DataEntry({ setHeader }) {
                     <br />
                     Weight: {weight}
                     <br />
-                    Sex: Male
+                    Sex: {sex}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Disagree</Button>
+                  <Button onClick={handleClose}>DISAGREE</Button>
                   <Button onClick={handleAgree} autoFocus>
-                    Agree
+                    AGREE
                   </Button>
                 </DialogActions>
               </Dialog>
