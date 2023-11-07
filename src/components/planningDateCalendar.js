@@ -69,6 +69,7 @@ function PlanningDateCalendar({
   const [workoutHighlightedDays, setWorkoutHighlightedDays] = React.useState(
     []
   );
+  const [once, setOnce] = React.useState(0);
 
   let tempMeals = localStorage.getItem("meals");
   let tempWorkouts = localStorage.getItem("workouts");
@@ -84,20 +85,24 @@ function PlanningDateCalendar({
   const workouts = JSON.parse(localStorage.getItem("workouts"));
 
   React.useEffect(() => {
-    // const todayMeals = meals.filter((meal) => {
-    //   return (
-    //     dayjs(meal.datetime).date() == dayjs().date() &&
-    //     dayjs(meal.datetime).month() == dayjs().month()
-    //   );
-    // });
-    // const todayWorkouts = workouts.filter((workout) => {
-    //   return (
-    //     dayjs(workout.datetime).date() == dayjs().date() &&
-    //     dayjs(workout.datetime).month() == dayjs().month()
-    //   );
-    // });
-    // setPlannedMeals(todayMeals);
-    // setPlannedWorkouts(todayWorkouts);
+    if (once == 0) {
+      const todayMeals = meals.filter((meal) => {
+        return (
+          dayjs(meal.datetime).date() == dayjs().date() &&
+          dayjs(meal.datetime).month() == dayjs().month()
+        );
+      });
+      const todayWorkouts = workouts.filter((workout) => {
+        return (
+          dayjs(workout.datetime).date() == dayjs().date() &&
+          dayjs(workout.datetime).month() == dayjs().month()
+        );
+      });
+      setPlannedMeals(todayMeals);
+      setPlannedWorkouts(todayWorkouts);
+
+      setOnce(1);
+    }
   });
 
   const fetchHighlightedDays = () => {
