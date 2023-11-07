@@ -48,8 +48,8 @@ export default function MenuAppBar({ children, page }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="static" style={{ margin: 0 }} disableGutters={true}>
+        <Toolbar disableGutters={true} variant="dense">
           <IconButton
             size="large"
             edge="start"
@@ -131,8 +131,6 @@ export default function MenuAppBar({ children, page }) {
           }
         </Toolbar>
       </AppBar>
-
-      <Toolbar />
 
       {children}
     </Box>

@@ -1,6 +1,6 @@
-import { Container, Grid, TextField, Fab, Typography } from "@mui/material";
+import { Container, Grid, TextField, Typography, Button } from "@mui/material";
 
-import { Add as AddIcon } from "@mui/icons-material";
+import { Add as AddIcon, Send as SendIcon } from "@mui/icons-material";
 
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -79,14 +79,6 @@ function storeMeal(name, protein, carbs, fat, calories, datetime) {
 function FoodEntry({ setHeader }) {
   // This is the page for planning a future meal (or meals!)
 
-  // description - https://mui.com/material-ui/react-text-field/
-
-  // protein (OPTIONAL) - https://mui.com/material-ui/react-text-field/
-  // carbs (OPTIONAL) - https://mui.com/material-ui/react-text-field/
-  // fat (OPTIONAL) - https://mui.com/material-ui/react-text-field/
-
-  // calories (OPTIONAL) - https://mui.com/material-ui/react-text-field/
-
   // datetime - https://mui.com/x/react-date-pickers/date-time-picker/
   //          - (make sure to show badges for number of meals planned per day - see https://mui.com/x/react-date-pickers/date-calendar/)
 
@@ -108,79 +100,74 @@ function FoodEntry({ setHeader }) {
 
   return (
     <Container maxWidth="xs">
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <OuterGrid>
+      <OuterGrid>
+        <GridItem>
+          <ControlledTextField
+            value={name}
+            setValue={setName}
+            label="Meal Label"
+          />
+        </GridItem>
+
+        <InnerGrid>
           <GridItem>
             <ControlledTextField
-              value={name}
-              setValue={setName}
-              label="Meal Label"
+              value={protein}
+              setValue={setProtein}
+              label="Protein (Grams)"
             />
           </GridItem>
-
-          <InnerGrid>
-            <GridItem>
-              <ControlledTextField
-                value={protein}
-                setValue={setProtein}
-                label="Protein (Grams)"
-              />
-            </GridItem>
-
-            <GridItem>
-              <ControlledTextField
-                value={carbs}
-                setValue={setCarbs}
-                label="Carbs (Grams)"
-              />
-            </GridItem>
-
-            <GridItem>
-              <ControlledTextField
-                value={fat}
-                setValue={setFat}
-                label="Fat (Grams)"
-              />
-            </GridItem>
-          </InnerGrid>
 
           <GridItem>
             <ControlledTextField
-              value={calories}
-              setValue={setCalories}
-              label="Calories"
+              value={carbs}
+              setValue={setCarbs}
+              label="Carbs (Grams)"
             />
           </GridItem>
 
           <GridItem>
-            <DateTimePicker
-              label="Time"
-              value={datetime}
-              viewRenderers={{
-                hours: renderTimeViewClock,
-                minutes: renderTimeViewClock,
-              }}
-              onChange={(newValue) => setDatetime(newValue)}
-              slotProps={{ textField: { fullWidth: true } }}
+            <ControlledTextField
+              value={fat}
+              setValue={setFat}
+              label="Fat (Grams)"
             />
           </GridItem>
-        </OuterGrid>
+        </InnerGrid>
 
-        <Fab
-          color="primary"
-          aria-label="add"
-          sx={{
-            position: "absolute",
-            bottom: 16,
-            right: 16,
-          }}
-          onClick={() =>
-            storeMeal(name, protein, carbs, fat, calories, datetime)
-          }
-        >
-          <AddIcon />
-        </Fab>
-      </LocalizationProvider>
+        <GridItem>
+          <ControlledTextField
+            value={calories}
+            setValue={setCalories}
+            label="Calories"
+          />
+        </GridItem>
+
+        <GridItem>
+          <DateTimePicker
+            label="Time"
+            value={datetime}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+            }}
+            onChange={(newValue) => setDatetime(newValue)}
+            slotProps={{ textField: { fullWidth: true } }}
+          />
+        </GridItem>
+
+        <GridItem>
+          <Button
+            variant="contained"
+            endIcon={<SendIcon />}
+            onClick={() =>
+              storeMeal(name, protein, carbs, fat, calories, datetime)
+            }
+          >
+            Submit
+          </Button>
+        </GridItem>
+      </OuterGrid>
     </Container>
   );
 }
