@@ -14,6 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
+import VisualSummary from "./pages/visualSummary.js";
 
 function App() {
   const [header, setHeader] = React.useState(1);
@@ -56,13 +57,8 @@ function App() {
             <Route path="/sleepplan" element={<SleepEntry />} />
 
             <Route
-              path="/summaryplot"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  summary plots
-                </Typography>
-              }
-            />
+              path="/summaryplot" element={<VisualSummary/>}/>
+             
 
             <Route
               path="/calendarview"
