@@ -84,20 +84,20 @@ function PlanningDateCalendar({
   const workouts = JSON.parse(localStorage.getItem("workouts"));
 
   React.useEffect(() => {
-    const todayMeals = meals.filter((meal) => {
-      return (
-        dayjs(meal.datetime).date() == dayjs().date() &&
-        dayjs(meal.datetime).month() == dayjs().month()
-      );
-    });
-    const todayWorkouts = workouts.filter((workout) => {
-      return (
-        dayjs(workout.datetime).date() == dayjs().date() &&
-        dayjs(workout.datetime).month() == dayjs().month()
-      );
-    });
-    setPlannedMeals(todayMeals);
-    setPlannedWorkouts(todayWorkouts);
+    // const todayMeals = meals.filter((meal) => {
+    //   return (
+    //     dayjs(meal.datetime).date() == dayjs().date() &&
+    //     dayjs(meal.datetime).month() == dayjs().month()
+    //   );
+    // });
+    // const todayWorkouts = workouts.filter((workout) => {
+    //   return (
+    //     dayjs(workout.datetime).date() == dayjs().date() &&
+    //     dayjs(workout.datetime).month() == dayjs().month()
+    //   );
+    // });
+    // setPlannedMeals(todayMeals);
+    // setPlannedWorkouts(todayWorkouts);
   });
 
   const fetchHighlightedDays = () => {
