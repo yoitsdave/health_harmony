@@ -119,7 +119,6 @@ function DataEntry({ setHeader }) {
   const [open, setOpen] = React.useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -129,6 +128,12 @@ function DataEntry({ setHeader }) {
   };
 
   const handleAgree = () => {
+    localStorage.setItem('name', name);
+    localStorage.setItem('age', age);
+    localStorage.setItem('feet', feet);
+    localStorage.setItem('inches', inches);
+    localStorage.setItem('weight', weight);
+    localStorage.setItem('sex', sex);
     
     setOpen(false);
 
@@ -143,6 +148,8 @@ function DataEntry({ setHeader }) {
     setTimeout(() => {
       setShowSuccessAlert(true);
     }, 1000);
+    console.log(localStorage.getItem('name'));
+
   };
 
 
@@ -154,10 +161,11 @@ function DataEntry({ setHeader }) {
   const [weight, setWeight] = React.useState("");
 
   const [sex, setSex] = React.useState('');
-
   const handleSexChange = (event) => {
     setSex(event.target.value);
   };
+
+  console.log(localStorage.getItem('age'));
 
 
   React.useEffect(() => setHeader("Enter User Information"));
