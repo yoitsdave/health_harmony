@@ -8,6 +8,7 @@ import { Add as AddIcon } from "@mui/icons-material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+import { BarChart } from '@mui/x-charts/BarChart';
 
 import dayjs from "dayjs";
 
@@ -152,8 +153,25 @@ function VisualSummary() {
       <Dialog open={isPopupOpen} onClose={handlePopupClose}>
         <DialogTitle>Selected Options</DialogTitle>
         <DialogContent>
+          <BarChart
+            xAxis={[
+              {
+                id: 'barCategories',
+                data: ['bar A', 'bar B', 'bar C'],
+                scaleType: 'band',
+              },
+            ]}
+            series={[
+              {
+                data: [2, 5, 3],
+              },
+            ]}
+            width={500}
+            height={300}
+          />
+
   
-          <p>Time Ranasdasdge: {range}</p>
+          <p>Time : {range}</p>
           <p>Category: {category}</p>
           <p>Type of Visual Summary: {visualSummary}</p>
         </DialogContent>
