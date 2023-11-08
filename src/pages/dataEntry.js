@@ -1,6 +1,15 @@
-import{MenuItem, TextField, Button, Box, InputLabel, Select, FormControl} from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import {
+  MenuItem,
+  TextField,
+  Button,
+  Box,
+  InputLabel,
+  Select,
+  FormControl,
+} from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import { Container, Grid, Fab, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { Add as AddIcon } from "@mui/icons-material";
 
@@ -10,19 +19,19 @@ import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
 import dayjs from "dayjs";
 
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
-import Snackbar from '@mui/material/Snackbar';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+import Snackbar from "@mui/material/Snackbar";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 function GridItem({ children }) {
   return (
@@ -30,13 +39,11 @@ function GridItem({ children }) {
       {children}
     </Grid>
   );
-} 
-
-function onSubmit(){
-  return (<div></div>);
 }
 
-
+function onSubmit() {
+  return <div></div>;
+}
 
 function OuterGrid({ children }) {
   return (
@@ -68,7 +75,6 @@ function InnerGrid({ children }) {
   );
 }
 
-
 function ControlledTextField({ value, setValue, label }) {
   return (
     <TextField
@@ -93,7 +99,7 @@ function ControlledNumberField({ value, setValue, label }) {
       id={label}
       aria-label={label}
       label={label}
-      type = "number"
+      type="number"
       variant="outlined"
       value={value}
       onChange={(event) => {
@@ -104,19 +110,30 @@ function ControlledNumberField({ value, setValue, label }) {
 }
 
 function storeInfo(name, age, inches, feet, weight, sex) {
-  const message = "Name: " + name + "\nAge : "+ age + "\nHeight: " + feet + "'" + inches + "\nSex: Male\n" + "Weight: " + weight
+  const message =
+    "Name: " +
+    name +
+    "\nAge : " +
+    age +
+    "\nHeight: " +
+    feet +
+    "'" +
+    inches +
+    "\nSex: Male\n" +
+    "Weight: " +
+    weight;
 
-  if (window.confirm(message) == true){
+  if (window.confirm(message) == true) {
     window.location.reload();
-    return (<Alert severity="success">This is a success message!</Alert>);
+    return <Alert severity="success">This is a success message!</Alert>;
   }
-  
 }
 
 function DataEntry({ setHeader }) {
-
   const [open, setOpen] = React.useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -127,30 +144,30 @@ function DataEntry({ setHeader }) {
   };
 
   const handleAgree = () => {
-    localStorage.setItem('name', name);
-    localStorage.setItem('age', age);
-    localStorage.setItem('feet', feet);
-    localStorage.setItem('inches', inches);
-    localStorage.setItem('weight', weight);
-    localStorage.setItem('sex', sex);
-    
+    localStorage.setItem("name", name);
+    localStorage.setItem("age", age);
+    localStorage.setItem("feet", feet);
+    localStorage.setItem("inches", inches);
+    localStorage.setItem("weight", weight);
+    localStorage.setItem("sex", sex);
+
     setOpen(false);
 
-    setName('');
-    setAge('');
-    setFeet('');
-    setInches('');
-    setWeight('');
-    setSex('');
+    setName("");
+    setAge("");
+    setFeet("");
+    setInches("");
+    setWeight("");
+    setSex("");
 
     // Delay showing the alert after the page is reloaded
     setTimeout(() => {
       setShowSuccessAlert(true);
     }, 1000);
-    console.log(localStorage.getItem('name'));
+    console.log(localStorage.getItem("name"));
 
+    navigate("/");
   };
-
 
   const [name, setName] = React.useState("");
 
@@ -159,21 +176,19 @@ function DataEntry({ setHeader }) {
   const [feet, setFeet] = React.useState("");
   const [weight, setWeight] = React.useState("");
 
-  const [sex, setSex] = React.useState('');
+  const [sex, setSex] = React.useState("");
   const handleSexChange = (event) => {
     setSex(event.target.value);
   };
 
-  console.log(localStorage.getItem('age'));
-
+  console.log(localStorage.getItem("age"));
 
   React.useEffect(() => setHeader("Enter User Information"));
 
   return (
-    
-    <center> 
+    <center>
       <Container maxWidth="xs">
-        <Toolbar/>
+        <Toolbar />
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <OuterGrid>
@@ -190,12 +205,11 @@ function DataEntry({ setHeader }) {
                 value={age}
                 setValue={setAge}
                 label="Age (Years)"
-                type = "number"
+                type="number"
               />
             </GridItem>
 
             <InnerGrid>
-
               <GridItem>
                 <ControlledNumberField
                   value={feet}
@@ -220,83 +234,88 @@ function DataEntry({ setHeader }) {
                 label="Weight (Pounds)"
               />
             </GridItem>
-        
+
             <GridItem>
-            <FormControl fullWidth>
-              <InputLabel htmlFor="sex-select">Sex</InputLabel>
-              <Select
-                label="Sex"
-                value={sex}
-                onChange={handleSexChange}
-                inputProps={{
-                  name: 'sex',
-                  id: 'sex-select',
-                }}
-                style={{ textAlign: 'left' }}
-              >
-                <MenuItem value="Male">Male</MenuItem>
-                <MenuItem value="Female">Female</MenuItem>
-      </Select>
-    </FormControl>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="sex-select">Sex</InputLabel>
+                <Select
+                  label="Sex"
+                  value={sex}
+                  onChange={handleSexChange}
+                  inputProps={{
+                    name: "sex",
+                    id: "sex-select",
+                  }}
+                  style={{ textAlign: "left" }}
+                >
+                  <MenuItem value="Male">Male</MenuItem>
+                  <MenuItem value="Female">Female</MenuItem>
+                </Select>
+              </FormControl>
             </GridItem>
 
             <GridItem>
-            <center>
-              <Button variant="contained" onClick={handleClickOpen} endIcon={<SendIcon />}>
-                Submit
-              </Button>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-              >
-                <DialogTitle id="alert-dialog-title">
-                  {"Is this correct?"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Name: {name}
-                    <br />
-                    Age: {age}
-                    <br />
-                    Height: {feet}'{inches}
-                    <br />
-                    Weight: {weight}
-                    <br />
-                    Sex: {sex}
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose}>DISAGREE</Button>
-                  <Button onClick={handleAgree} autoFocus>
-                    AGREE
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </center>
+              <center>
+                <Button
+                  variant="contained"
+                  onClick={handleClickOpen}
+                  endIcon={<SendIcon />}
+                >
+                  Submit
+                </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"Is this correct?"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Name: {name}
+                      <br />
+                      Age: {age}
+                      <br />
+                      Height: {feet}'{inches}
+                      <br />
+                      Weight: {weight}
+                      <br />
+                      Sex: {sex}
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose}>DISAGREE</Button>
+                    <Button onClick={handleAgree} autoFocus>
+                      AGREE
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </center>
             </GridItem>
             <GridItem>
-              {showSuccessAlert && <Slide direction="left" in = {showSuccessAlert} >
-                <Stack sx={{ width: '100%' }} spacing={1}>
-                  <Alert severity="success" variant = "filled" onClose={() => setShowSuccessAlert(false)}>
-                    <AlertTitle>
-                      <strong>Congrats! Your info has been saved!</strong>
-                    </AlertTitle>
-                  </Alert>
-                </Stack>
-              </Slide>}
+              {showSuccessAlert && (
+                <Slide direction="left" in={showSuccessAlert}>
+                  <Stack sx={{ width: "100%" }} spacing={1}>
+                    <Alert
+                      severity="success"
+                      variant="filled"
+                      onClose={() => setShowSuccessAlert(false)}
+                    >
+                      <AlertTitle>
+                        <strong>Congrats! Your info has been saved!</strong>
+                      </AlertTitle>
+                    </Alert>
+                  </Stack>
+                </Slide>
+              )}
             </GridItem>
-
           </OuterGrid>
-
-          
         </LocalizationProvider>
       </Container>
     </center>
   );
 }
-
-
 
 export default DataEntry;

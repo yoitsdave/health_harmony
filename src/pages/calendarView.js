@@ -16,6 +16,7 @@ import PlanningDateCalendar from "../components/planningDateCalendar.js";
 import FoodEntryDialogue from "../components/foodEntryDialogue.js";
 import WorkoutEntryDialogue from "../pages/workoutEntry.js";
 import SleepEntryDialogue from "../pages/sleepEntry.js";
+import RedirectDialogue from "../components/redirectDialogue.js";
 
 import { ContainerGrid, GridItem } from "../components/gridItems.js";
 import { MealSummary, WorkoutSummary } from "../components/daySummary.js";
@@ -27,6 +28,10 @@ import dayjs from "dayjs";
 function CalendarView({ setHeader }) {
   React.useEffect(() => {
     setHeader("Health Harmony");
+
+    if (localStorage.getItem("name") === null) {
+      setRedirectOpen(true);
+    }
   });
 
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
@@ -36,6 +41,8 @@ function CalendarView({ setHeader }) {
   const [foodEntryOpen, setFoodEntryOpen] = React.useState(false);
   const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
   const [sleepEntryOpen, setSleepEntryOpen] = React.useState(false);
+
+  const [redirectOpen, setRedirectOpen] = React.useState(false);
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }}>
@@ -69,10 +76,9 @@ function CalendarView({ setHeader }) {
         setOpen={setWorkoutEntryOpen}
       />
 
-      <SleepEntryDialogue
-        open={sleepEntryOpen}
-        setOpen={setSleepEntryOpen}
-      />
+      <SleepEntryDialogue open={sleepEntryOpen} setOpen={setSleepEntryOpen} />
+
+      <RedirectDialogue open={redirectOpen} setOpen={setRedirectOpen} />
 
       <SpeedDial
         sx={{ position: "absolute", bottom: 16, right: 16 }}
