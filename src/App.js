@@ -1,7 +1,4 @@
-import FoodEntry from "./pages/foodEntry.js";
 import CalendarView from "./pages/calendarView.js";
-import SleepEntry from "./pages/sleepEntry.js";
-import WorkoutEntry from "./pages/workoutEntry.js";
 import DataEntry from "./pages/dataEntry.js";
 import Homepage from "./pages/homepage.js";
 import Logout from "./pages/logout.js";
@@ -41,15 +38,6 @@ function App() {
               path="/personaldataentry"
               element={<DataEntry setHeader={setHeader} />}
             />
-
-            <Route
-              path="/foodplan"
-              element={<FoodEntry setHeader={setHeader} />}
-            />
-
-            <Route path="/workoutplan" element={<WorkoutEntry />} />
-
-            <Route path="/sleepplan" element={<SleepEntry />} />
 
             <Route path="/summaryplot" element={<VisualSummary />} />
 
