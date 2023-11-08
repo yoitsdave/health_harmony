@@ -39,7 +39,7 @@ function App() {
               element={<DataEntry setHeader={setHeader} />}
             />
 
-            <Route path="/summaryplot" element={<VisualSummary />} />
+            <Route path="/summaryplot" element={<VisualSummary setHeader={setHeader} />} />
 
             <Route
               path="/calendarview"

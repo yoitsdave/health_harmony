@@ -19,6 +19,8 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { Cancel as CancelIcon } from "@mui/icons-material"; // Import CancelIcon
 import dayjs from "dayjs";
 import * as React from "react";
+import Toolbar from "@mui/material/Toolbar";
+
 
 function GridItem({ children }) {
   return (
@@ -42,7 +44,8 @@ function InnerGrid({ children }) {
     </Grid>
   )}
 
-function VisualSummary() {
+function VisualSummary({setHeader}) {
+  React.useEffect(() => setHeader("Summary Plots"));
   const [range, setRange] = React.useState("Monthly");
   const [category, setCategory] = React.useState("Calories Consumed");
   const [isPopupOpen, setPopupOpen] = React.useState(false);
@@ -65,6 +68,7 @@ function VisualSummary() {
 
   return (
     <Container maxWidth="xs">
+      <Toolbar/>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <InnerGrid>
           <GridItem>
