@@ -1,7 +1,21 @@
-import { Container, Grid, TextField, Button, Typography, Select, FormControl, InputLabel, MenuItem, Dialog, DialogContent, DialogActions, DialogTitle} from "@mui/material";
+import {
+  Container,
+  Grid,
+  TextField,
+  Button,
+  Typography,
+  Select,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogTitle,
+} from "@mui/material";
 import { Send as SendIcon, Cancel as CancelIcon } from "@mui/icons-material";
 
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab } from "@mui/material";
 
 import { Add as AddIcon } from "@mui/icons-material";
 
@@ -12,54 +26,50 @@ import dayjs from "dayjs";
 
 import * as React from "react";
 
-
 function GridItem({ children }) {
-   return (
-     <Grid item sm={12}>
-       {children}
-     </Grid>
-   );
- }
-  function InnerGrid({ children }) {
-   return (
-     <Grid
-       item
-       container
-       sm={12}
-       spacing={1}
-       direction="column"
-       justifyContent="flex-start"
-       alignItems="stretch"
-     >
-       {children}
-     </Grid>
-   );
- }
+  return (
+    <Grid item sm={12}>
+      {children}
+    </Grid>
+  );
+}
+function InnerGrid({ children }) {
+  return (
+    <Grid
+      item
+      container
+      sm={12}
+      spacing={1}
+      direction="column"
+      justifyContent="flex-start"
+      alignItems="stretch"
+    >
+      {children}
+    </Grid>
+  );
+}
 
-
- function ControlledTextField({ value, setValue, label }) {
-   return (
-     <TextField
-       fullWidth
-       id={label}
-       aria-label={label}
-       label={label}
-       variant="outlined"
-       value={value}
-       onChange={(event) => {
-         setValue(event.target.value);
-       }}
-     />
-   );
- }
-
-
+function ControlledTextField({ value, setValue, label }) {
+  return (
+    <TextField
+      fullWidth
+      id={label}
+      aria-label={label}
+      label={label}
+      variant="outlined"
+      value={value}
+      onChange={(event) => {
+        setValue(event.target.value);
+      }}
+    />
+  );
+}
 
 function storeSleep(start, end, quality, datetime) {
   const now = dayjs();
   const scheduled = dayjs(datetime);
   const diff = now.diff(scheduled, "minute");
-  
+
   let sleeps = localStorage.getItem("sleeps");
 
   if (sleeps == null || sleeps == "") {
@@ -78,50 +88,45 @@ function storeSleep(start, end, quality, datetime) {
   localStorage.setItem("sleeps", JSON.stringify(sleeps.concat([newSleep])));
 }
 
+function SleepEntry({ open, setOpen, date, setRefresh }) {
+  const [start, setStart] = React.useState(dayjs());
+  const [end, setEnd] = React.useState(dayjs());
+  const [quality, setQuality] = React.useState("");
+  const [datetime, setDatetime] = React.useState(date);
 
-
-
-function SleepEntry({open, setOpen, date}) {
-   const [start, setStart] = React.useState(dayjs());
-   const [end, setEnd] = React.useState(dayjs());
-   const [quality, setQuality] = React.useState("");
-   const [datetime, setDatetime] = React.useState(date);
-
-
-   return(
+  return (
     <Dialog open={open}>
       <DialogTitle> Log Sleep </DialogTitle>
       <DialogContent>
         <Container maxWidth="xs">
-          
-            <GridItem>
+          <GridItem>
             <DateTimePicker
-               label="Sleep Start Time"
-               value={start}
-               onChange={(newValue) => setStart(newValue)}
-               slotProps={{ textField: { fullWidth: true } }}
-             />
-            </GridItem>
-  
-            <InnerGrid>
-              <GridItem>
-              <DateTimePicker
-               label="Sleep End Time"
-               value={end}
-               onChange={(newValue) => setEnd(newValue)}
-               slotProps={{ textField: { fullWidth: true } }}
-             />
-              </GridItem>
-  
-              <GridItem>
-              <ControlledTextField
-               value={quality}
-               setValue={setQuality}
-               label="Sleep Quality (1-10)"
-             />
-              </GridItem>
+              label="Sleep Start Time"
+              value={start}
+              onChange={(newValue) => setStart(newValue)}
+              slotProps={{ textField: { fullWidth: true } }}
+            />
+          </GridItem>
 
-              <GridItem>
+          <InnerGrid>
+            <GridItem>
+              <DateTimePicker
+                label="Sleep End Time"
+                value={end}
+                onChange={(newValue) => setEnd(newValue)}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+            </GridItem>
+
+            <GridItem>
+              <ControlledTextField
+                value={quality}
+                setValue={setQuality}
+                label="Sleep Quality (1-10)"
+              />
+            </GridItem>
+
+            <GridItem>
               <DateTimePicker
                 label="Current Time"
                 value={datetime}
@@ -133,10 +138,10 @@ function SleepEntry({open, setOpen, date}) {
                 slotProps={{ textField: { fullWidth: true } }}
               />
             </GridItem>
-            </InnerGrid>
+          </InnerGrid>
         </Container>
       </DialogContent>
-  
+
       <DialogActions>
         <Button
           variant="contained"
@@ -151,6 +156,7 @@ function SleepEntry({open, setOpen, date}) {
           onClick={() => {
             storeSleep(start, end, quality);
             setOpen(false);
+            setRefresh(1);
           }}
         >
           Add Sleep Log
@@ -158,9 +164,6 @@ function SleepEntry({open, setOpen, date}) {
       </DialogActions>
     </Dialog>
   );
-  }
-
+}
 
 export default SleepEntry;
-
-

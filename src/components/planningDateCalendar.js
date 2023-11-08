@@ -63,16 +63,20 @@ function PlanningDateCalendar({
   setSelectedDate,
   setPlannedMeals,
   setPlannedWorkouts,
+  setPlannedSleep,
+  refresh,
+  setRefresh,
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [foodHighlightedDays, setFoodHighlightedDays] = React.useState([]);
   const [workoutHighlightedDays, setWorkoutHighlightedDays] = React.useState(
     []
   );
-  const [once, setOnce] = React.useState(0);
+  const [sleepHighlightedDays, setSleepHighlightedDays] = React.useState([]);
 
   let tempMeals = localStorage.getItem("meals");
   let tempWorkouts = localStorage.getItem("workouts");
+  let tempSleeps = localStorage.getItem("sleeps");
 
   if (tempMeals == null || tempMeals == "") {
     localStorage.setItem("meals", JSON.stringify([]));
@@ -80,12 +84,16 @@ function PlanningDateCalendar({
   if (tempWorkouts == null || tempWorkouts == "") {
     localStorage.setItem("workouts", JSON.stringify([]));
   }
+  if (tempSleeps == null || tempSleeps == "") {
+    localStorage.setItem("sleeps", JSON.stringify([]));
+  }
 
   const meals = JSON.parse(localStorage.getItem("meals"));
   const workouts = JSON.parse(localStorage.getItem("workouts"));
+  const sleeps = JSON.parse(localStorage.getItem("sleeps"));
 
   React.useEffect(() => {
-    if (once == 0) {
+    if (refresh == 1) {
       const todayMeals = meals.filter((meal) => {
         return (
           dayjs(meal.datetime).date() == dayjs().date() &&
@@ -98,10 +106,18 @@ function PlanningDateCalendar({
           dayjs(workout.datetime).month() == dayjs().month()
         );
       });
+      const todaySleeps = sleeps.filter((sleep) => {
+        return (
+          dayjs(sleep.start).date() == dayjs().date() &&
+          dayjs(sleep.start).month() == dayjs().month()
+        );
+      });
+
       setPlannedMeals(todayMeals);
       setPlannedWorkouts(todayWorkouts);
+      setPlannedSleep(todaySleeps);
 
-      setOnce(1);
+      setRefresh(0);
     }
   });
 
@@ -116,7 +132,11 @@ function PlanningDateCalendar({
         return dayjs(workout.datetime).date();
       })
     );
-
+    setSleepHighlightedDays(
+      sleeps.map((sleep) => {
+        return dayjs(sleep.start).date();
+      })
+    );
     setIsLoading(false);
   };
 

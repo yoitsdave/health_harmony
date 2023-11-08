@@ -19,7 +19,11 @@ import SleepEntryDialogue from "../pages/sleepEntry.js";
 import RedirectDialogue from "../components/redirectDialogue.js";
 
 import { ContainerGrid, GridItem } from "../components/gridItems.js";
-import { MealSummary, WorkoutSummary } from "../components/daySummary.js";
+import {
+  MealSummary,
+  SleepSummary,
+  WorkoutSummary,
+} from "../components/daySummary.js";
 
 import * as React from "react";
 
@@ -37,12 +41,15 @@ function CalendarView({ setHeader }) {
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
   const [plannedMeals, setPlannedMeals] = React.useState([]);
   const [plannedWorkouts, setPlannedWorkouts] = React.useState([]);
+  const [plannedSleep, setPlannedSleep] = React.useState([]);
 
   const [foodEntryOpen, setFoodEntryOpen] = React.useState(false);
   const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
   const [sleepEntryOpen, setSleepEntryOpen] = React.useState(false);
 
   const [redirectOpen, setRedirectOpen] = React.useState(false);
+
+  const [refresh, setRefresh] = React.useState(1);
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }}>
@@ -53,6 +60,9 @@ function CalendarView({ setHeader }) {
             setSelectedDate={setSelectedDate}
             setPlannedMeals={setPlannedMeals}
             setPlannedWorkouts={setPlannedWorkouts}
+            setPlannedSleep={setPlannedSleep}
+            refresh={refresh}
+            setRefresh={setRefresh}
           />
         </GridItem>
 
@@ -63,21 +73,31 @@ function CalendarView({ setHeader }) {
         <GridItem margin="8px" md={12}>
           <WorkoutSummary plannedWorkouts={plannedWorkouts} />
         </GridItem>
+
+        <GridItem margin="8px" md={12}>
+          <SleepSummary plannedSleep={plannedSleep} />
+        </GridItem>
       </ContainerGrid>
 
       <FoodEntryDialogue
         open={foodEntryOpen}
         setOpen={setFoodEntryOpen}
         date={selectedDate}
+        setRefresh={setRefresh}
       />
 
       <WorkoutEntryDialogue
         open={workoutEntryOpen}
         setOpen={setWorkoutEntryOpen}
         date={selectedDate}
+        setRefresh={setRefresh}
       />
 
-      <SleepEntryDialogue open={sleepEntryOpen} setOpen={setSleepEntryOpen} />
+      <SleepEntryDialogue
+        open={sleepEntryOpen}
+        setOpen={setSleepEntryOpen}
+        setRefresh={setRefresh}
+      />
 
       <RedirectDialogue open={redirectOpen} setOpen={setRedirectOpen} />
 

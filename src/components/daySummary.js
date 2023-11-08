@@ -103,4 +103,56 @@ function WorkoutSummary({ plannedWorkouts }) {
   );
 }
 
-export { MealSummary, WorkoutSummary };
+function SleepSummary({ plannedSleep }) {
+  return (
+    <ContainerGrid>
+      <GridItem>
+        <Typography variant="h5"> Sleep </Typography>
+      </GridItem>
+
+      {plannedSleep.length > 0 ? (
+        plannedSleep.map((sleep) => {
+          return (
+            <GridItem md={6}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Typography gutterBottom>
+                    Slept for{" "}
+                    {dayjs(sleep.end).diff(dayjs(sleep.start), "hours")}:
+                    {dayjs(sleep.end).diff(dayjs(sleep.start), "minutes") -
+                      60 * dayjs(sleep.end).diff(dayjs(sleep.start), "hours")}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    Quality: {sleep.quality}
+                  </Typography>
+                  <Typography variant="body2">
+                    Start: {dayjs(sleep.start).format("hh:mm")}
+                    <br />
+                    End: {dayjs(sleep.end).format("hh:mm")}
+                    <br />
+                  </Typography>
+                </CardContent>
+
+                <CardActions>
+                  <Button
+                    variant="contained"
+                    endIcon={<EditIcon />}
+                    onClick={() => alert("edit is currently not supported :(")}
+                  >
+                    Edit
+                  </Button>
+                </CardActions>
+              </Card>
+            </GridItem>
+          );
+        })
+      ) : (
+        <GridItem>
+          <Typography> No planned sleep </Typography>
+        </GridItem>
+      )}
+    </ContainerGrid>
+  );
+}
+
+export { MealSummary, WorkoutSummary, SleepSummary };

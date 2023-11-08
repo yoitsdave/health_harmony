@@ -101,7 +101,7 @@ function storeMeal(name, protein, carbs, fat, calories, datetime) {
   localStorage.setItem("meals", JSON.stringify(meals.concat([newMeal])));
 }
 
-function FoodEntryDialogue({ open, setOpen, date }) {
+function FoodEntryDialogue({ open, setOpen, date, setRefresh }) {
   const [name, setName] = React.useState("");
 
   const [protein, setProtein] = React.useState("");
@@ -191,6 +191,7 @@ function FoodEntryDialogue({ open, setOpen, date }) {
           onClick={() => {
             storeMeal(name, protein, carbs, fat, calories, datetime);
             setOpen(false);
+            setRefresh(1);
           }}
         >
           Add Meal
