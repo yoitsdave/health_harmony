@@ -109,7 +109,7 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
     const scheduled = dayjs(datetime);
     const diff = now.diff(scheduled, "minute");
 
-    let workouts = localStorage.getItem("workout");
+    let workouts = localStorage.getItem("workouts");
 
     if (workouts == null || workouts == "") {
       localStorage.setItem("meals", JSON.stringify([]));
