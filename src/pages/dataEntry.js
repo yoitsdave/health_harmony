@@ -72,7 +72,6 @@ function InnerGrid({ children }) {
 function ControlledTextField({ value, setValue, label }) {
   return (
     <TextField
-      required
       autoComplete="on"
       fullWidth
       id={label}
@@ -89,7 +88,6 @@ function ControlledTextField({ value, setValue, label }) {
 function ControlledNumberField({ value, setValue, label }) {
   return (
     <TextField
-      required
       autoComplete="on"
       fullWidth
       id={label}
@@ -299,34 +297,6 @@ function DataEntry({ setHeader }) {
   );
 }
 
-/*function DataEntry() {
-  return <p>
-    <center>
-      <h1>ENTER YOUR HEALTH DATA!</h1>
-      <Box sx={{m:3, width: '50ch', height: '10ch'}} noValidate autoComplete="off">
-        <form>
-          <div>
-            <TextField required label="Name"  />
-            <TextField required label="Age" type="number" />
-          </div>
-          <div>
-            <TextField required label="Weight" type = "number"/>
-            <TextField required label="Height"/>
-          </div>
-          <div>
-            <Select label="Sex">
-              <MenuItem value={'Male'}>Male</MenuItem>
-              <MenuItem value={'Female'}>Female</MenuItem>
-            </Select>
-          </div>
-          <Button variant="contained" endIcon={<SendIcon />}>
-            Submit
-          </Button>
-        </form>
-      </Box>
-    </center>
-  </p>;
-}
-*/
+
 
 export default DataEntry;
