@@ -14,7 +14,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 
-
+import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Dialog from '@mui/material/Dialog';
@@ -172,8 +172,11 @@ function DataEntry({ setHeader }) {
   React.useEffect(() => setHeader("Enter User Information"));
 
   return (
+    
     <center> 
       <Container maxWidth="xs">
+        <Toolbar/>
+
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <OuterGrid>
             <GridItem>
