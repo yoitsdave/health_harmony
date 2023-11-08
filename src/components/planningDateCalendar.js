@@ -15,8 +15,10 @@ function ServerDay({
   day,
   meals,
   workouts,
+  sleeps,
   setPlannedMeals,
   setPlannedWorkouts,
+  setPlannedSleep,
   ...other
 }) {
   const dayOfMeals = meals.filter((meal) => {
@@ -29,6 +31,12 @@ function ServerDay({
     return (
       dayjs(workout.datetime).date() == day.date() &&
       dayjs(workout.datetime).month() == day.month()
+    );
+  });
+  const dayOfSleeps = sleeps.filter((sleep) => {
+    return (
+      dayjs(sleep.datetime).date() == day.date() &&
+      dayjs(sleep.datetime).month() == day.month()
     );
   });
 
@@ -52,6 +60,7 @@ function ServerDay({
         onClick={(event) => {
           setPlannedMeals(dayOfMeals);
           setPlannedWorkouts(dayOfWorkouts);
+          setPlannedSleep(dayOfSleeps);
         }}
       />
     </Badge>
@@ -166,8 +175,10 @@ function PlanningDateCalendar({
             workoutHighlightedDays,
             meals,
             workouts,
+            sleeps,
             setPlannedMeals,
             setPlannedWorkouts,
+            setPlannedSleep,
           },
         }}
       />
