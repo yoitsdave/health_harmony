@@ -126,9 +126,9 @@ function SleepSummary({ plannedSleep }) {
                     Quality: {sleep.quality}
                   </Typography>
                   <Typography variant="body2">
-                    Start: {dayjs(sleep.start).format("hh:mm aa")}
+                    Start: {dayjs(sleep.start).format("hh:mm a")}
                     <br />
-                    End: {dayjs(sleep.end).format("hh:mm aa")}
+                    End: {dayjs(sleep.end).format("hh:mm a")}
                     <br />
                   </Typography>
                 </CardContent>
