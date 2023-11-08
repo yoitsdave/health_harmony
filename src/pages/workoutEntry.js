@@ -82,14 +82,29 @@ function ControlledTextField({ value, setValue, label }) {
   );
 }
 
- const storeWorkout = () => {
-   if (Number(durationHours) === 0){
-     alert(`Workout with ${exerciseType} lasting ${durationMinutes} minutes recorded with an intensity of ${intensity}.`)
-   } else {
-     alert(`Workout with ${exerciseType} lasting ${durationHours} hours and ${durationMinutes} minutes recorded with an intensity of ${intensity}.`);
-   }
-  
- };
+ function storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes) {
+
+  let workouts = localStorage.getItem("workout");
+
+  if (workouts == null || workouts == "") {
+    localStorage.setItem("meals", JSON.stringify([]));
+  }
+  workouts = JSON.parse(localStorage.getItem("workouts"));
+
+  const newWorkout = {
+    id: workouts.length,
+    durationHours: durationHours,
+    durationMinutes: durationMinutes,
+    exerciseType: exerciseType,
+    intensity: intensity,
+    notes: notes,
+  };
+
+  localStorage.setItem("workouts", JSON.stringify(workouts.concat([newWorkout])));
+}
+
+
+
 
  const [durationHours, setDurationHours] = useState('');
  const [durationMinutes, setDurationMinutes] = useState('');
@@ -154,6 +169,8 @@ function ControlledTextField({ value, setValue, label }) {
           <TextField
            fullWidth
            label="Notes"
+           value={notes}
+           setValue={setNotes}
            multiline
            rows={4}
            placeholder={"Write down a small reflection of your workout"}
@@ -176,7 +193,7 @@ function ControlledTextField({ value, setValue, label }) {
         variant="contained"
         endIcon={<SendIcon />}
         onClick={() => {
-          storeWorkout();
+          storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes);
           setOpen(false);
         }}
       >
