@@ -15,6 +15,7 @@ import {
 import PlanningDateCalendar from "../components/planningDateCalendar.js";
 import FoodEntryDialogue from "../components/foodEntryDialogue.js";
 import WorkoutEntryDialogue from "../pages/workoutEntry.js";
+import SleepEntryDialogue from "../pages/sleepEntry.js";
 
 import { ContainerGrid, GridItem } from "../components/gridItems.js";
 import { MealSummary, WorkoutSummary } from "../components/daySummary.js";
@@ -34,6 +35,7 @@ function CalendarView({ setHeader }) {
 
   const [foodEntryOpen, setFoodEntryOpen] = React.useState(false);
   const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
+  const [sleepEntryOpen, setSleepEntryOpen] = React.useState(false);
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }}>
@@ -62,6 +64,16 @@ function CalendarView({ setHeader }) {
         date={selectedDate}
       />
 
+      <WorkoutEntryDialogue
+        open={workoutEntryOpen}
+        setOpen={setWorkoutEntryOpen}
+      />
+
+      <SleepEntryDialogue
+        open={sleepEntryOpen}
+        setOpen={setSleepEntryOpen}
+      />
+
       <SpeedDial
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
@@ -77,14 +89,14 @@ function CalendarView({ setHeader }) {
         <SpeedDialAction
           key="workout"
           icon={<DumbellIcon />}
-          onClick={() => alert("record workout not supported :(")}
           tooltipTitle="Plan or Record Workout"
+          onClick={() => setWorkoutEntryOpen(true)}
         />
 
         <SpeedDialAction
           key="sleep"
           icon={<BedtimeIcon />}
-          onClick={() => alert("record sleep not supported :(")}
+          onClick={() => setSleepEntryOpen(true)}
           tooltipTitle="Plan or Record Sleep"
         />
       </SpeedDial>

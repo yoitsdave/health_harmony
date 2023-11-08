@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
-import { Container, Grid, TextField, Button, Typography, Select, FormControl, InputLabel, MenuItem, Dialog, DialogContent} from "@mui/material";
-import { Add as AddIcon, Send as SendIcon } from "@mui/icons-material";
+import { Container, Grid, TextField, Button, Typography, Select, FormControl, InputLabel, MenuItem, Dialog, DialogContent, DialogActions, DialogTitle} from "@mui/material";
+import { Send as SendIcon, Cancel as CancelIcon } from "@mui/icons-material";
 
 
-function WorkoutEntry() {
+function WorkoutEntry({open, setOpen}) {
 
  const exerciseTypes = [
    'Walk',
@@ -98,27 +98,30 @@ function ControlledTextField({ value, setValue, label }) {
  const [notes, setNotes] = useState("");
 
  return (
-  <Container maxWidth="xs">
-    <OuterGrid>
-      <GridItem>
-        <ControlledTextField
-          value={durationHours}
-          setValue={setDurationHours}
+  <Dialog open={open}>
+    <DialogTitle> Add Workout </DialogTitle>
+    <DialogContent>
+      <Container maxWidth="xs">
+        <OuterGrid>
+          <GridItem>
+            <ControlledTextField
+            value={durationHours}
+            setValue={setDurationHours}
           label="Duration (Hours)"
         />
-      </GridItem>
+          </GridItem>
 
-      <InnerGrid>
-        <GridItem>
-          <ControlledTextField
-            value={durationMinutes}
-            setValue={setDurationMinutes}
-            label="Duration (Minutes)"
-          />
-        </GridItem>
+          <InnerGrid>
+            <GridItem>
+              <ControlledTextField
+                value={durationMinutes}
+                setValue={setDurationMinutes}
+                label="Duration (Minutes)"
+              />
+            </GridItem>
 
-        <GridItem>
-        <FormControl fullWidth>
+            <GridItem>
+            <FormControl fullWidth>
            <InputLabel id="exercise-type-label">Exercise Type</InputLabel>
            <Select
              labelId="exercise-type-label"
@@ -134,20 +137,21 @@ function ControlledTextField({ value, setValue, label }) {
              ))}
            </Select>
          </FormControl>
+            </GridItem>
+          </InnerGrid>
 
-        </GridItem>
-
-        <GridItem>
-          <ControlledTextField
-            value={intensity}
-            setValue={setIntensity}
-            label="Intensity (1-10)"
-          />
-        </GridItem>
-      </InnerGrid>
-
-      <GridItem>
-      <TextField
+      
+          <GridItem>
+            <ControlledTextField
+             value={intensity}
+             setValue={setIntensity}
+             label="Intensity (1-10)"
+            />
+          </GridItem>
+     
+          
+          <GridItem>
+          <TextField
            fullWidth
            label="Notes"
            multiline
@@ -155,25 +159,33 @@ function ControlledTextField({ value, setValue, label }) {
            placeholder={"Write down a small reflection of your workout"}
            onChange={(e) => setNotes(e.target.value)}
          />
+          </GridItem>
+        </OuterGrid>
+      </Container>
+    </DialogContent>
 
-      </GridItem>
-
-
-      <GridItem>
-        <Button
-          variant="contained"
-          endIcon={<SendIcon />}
-          onClick={() =>
-            storeWorkout()
-          }
-        >
-          Submit
-        </Button>
-      </GridItem>
-    </OuterGrid>
-  </Container>
+    <DialogActions>
+      <Button
+        variant="contained"
+        endIcon={<CancelIcon />}
+        onClick={() => setOpen(false)}
+      >
+        Cancel
+      </Button>
+      <Button
+        variant="contained"
+        endIcon={<SendIcon />}
+        onClick={() => {
+          storeWorkout();
+          setOpen(false);
+        }}
+      >
+        Add Workout
+      </Button>
+    </DialogActions>
+  </Dialog>
 );
 }
 
-
 export default WorkoutEntry;
+
