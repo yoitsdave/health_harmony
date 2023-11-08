@@ -2,6 +2,8 @@ import CalendarView from "./pages/calendarView.js";
 import DataEntry from "./pages/dataEntry.js";
 import Homepage from "./pages/homepage.js";
 import Logout from "./pages/logout.js";
+import Notifications from "./pages/notifs.js";
+import Error404 from "./pages/error404.js";
 
 import AppBar from "./components/appBar.js";
 
@@ -25,11 +27,7 @@ function App() {
           <Routes>
             <Route
               path="/notifications"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  Notifications are currently unsupported :(
-                </Typography>
-              }
+              element={<Notifications setHeader={setHeader} />}
             />
 
             <Route path="/reset" element={<Logout />} />
@@ -48,14 +46,7 @@ function App() {
 
             <Route path="/" element={<Homepage setHeader={setHeader} />} />
 
-            <Route
-              path="*"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  404 get outta here
-                </Typography>
-              }
-            />
+            <Route path="*" element={<Error404 setHeader={setHeader} />} />
           </Routes>
         </AppBar>
       </LocalizationProvider>
