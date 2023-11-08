@@ -25,7 +25,7 @@ import dayjs from "dayjs";
 
 function CalendarView({ setHeader }) {
   React.useEffect(() => {
-    setHeader("Calendar View");
+    setHeader("Health Harmony");
   });
 
   const [selectedDate, setSelectedDate] = React.useState(dayjs());

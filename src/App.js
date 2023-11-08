@@ -29,7 +29,7 @@ function App() {
               path="/notifications"
               element={
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  Notifications
+                  Notifications are currently unsupported :(
                 </Typography>
               }
             />
@@ -38,7 +38,7 @@ function App() {
               path="/reset"
               element={
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  reset
+                  Logout is currently unsupported :(
                 </Typography>
               }
             />
