@@ -3,6 +3,7 @@ import CalendarView from "./pages/calendarView.js";
 import SleepEntry from "./pages/sleepEntry.js";
 import WorkoutEntry from "./pages/workoutEntry.js";
 import DataEntry from "./pages/dataEntry.js";
+import Homepage from "./pages/homepage.js";
 
 import AppBar from "./components/appBar.js";
 
@@ -17,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import VisualSummary from "./pages/visualSummary.js";
 
 function App() {
-  const [header, setHeader] = React.useState(1);
+  const [header, setHeader] = React.useState("Health Harmony");
 
   return (
     <HashRouter>
@@ -56,23 +57,14 @@ function App() {
 
             <Route path="/sleepplan" element={<SleepEntry />} />
 
-            <Route
-              path="/summaryplot" element={<VisualSummary/>}/>
-             
+            <Route path="/summaryplot" element={<VisualSummary />} />
 
             <Route
               path="/calendarview"
               element={<CalendarView setHeader={setHeader} />}
             />
 
-            <Route
-              path="/"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  homepage
-                </Typography>
-              }
-            />
+            <Route path="/" element={<Homepage setHeader={setHeader} />} />
 
             <Route
               path="*"
