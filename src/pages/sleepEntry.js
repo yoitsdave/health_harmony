@@ -55,12 +55,25 @@ function GridItem({ children }) {
 
 
 
+function storeSleep(start, end, quality) {
+  const formatStart = start.format("h:mm A");
+  const formatEnd = end.format("h:mm A");
+ 
+  let sleeps = localStorage.getItem("sleeps");
 
-function storeSleep(start,end,quality) {
- const formatStart = start.format("h:mm A");
- const formatEnd = end.format("h:mm A");
-  
- alert(`Logged sleep from (${formatStart}) to (${formatEnd}), Quality: ${quality}`);
+  if (sleeps == null || sleeps == "") {
+    localStorage.setItem("sleeps", JSON.stringify([]));
+  }
+  sleeps = JSON.parse(localStorage.getItem("sleeps"));
+
+  const newSleep = {
+    id: sleeps.length,
+    start: start,
+    end: end,
+    quality: quality
+  };
+
+  localStorage.setItem("sleeps", JSON.stringify(sleeps.concat([newSleep])));
 }
 
 
