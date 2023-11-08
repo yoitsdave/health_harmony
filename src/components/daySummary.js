@@ -69,12 +69,15 @@ function WorkoutSummary({ plannedWorkouts }) {
             <GridItem md={6}>
               <Card variant="outlined">
                 <CardContent>
-                  <Typography gutterBottom>{workout.name}</Typography>
+                  <Typography gutterBottom>{workout.exerciseType}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {workout.datetime.format("hh:mm a")}
+                    {dayjs(workout.datetime).format("hh:mm a")}
                   </Typography>
                   <Typography variant="body2">
-                    Calories: {workout.calories} <br />
+                    Duration: {workout.durationHours}:{workout.durationMinutes}
+                    <br />
+                    Intensity: {workout.intensity} <br />
+                    Notes: {workout.notes} <br />
                   </Typography>
                 </CardContent>
 

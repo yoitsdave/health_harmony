@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import { Container, Grid, TextField, Button, Typography, Select, FormControl, InputLabel, MenuItem, Dialog, DialogContent, DialogActions, DialogTitle} from "@mui/material";
 import { Send as SendIcon, Cancel as CancelIcon } from "@mui/icons-material";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
+import dayjs from "dayjs";
 
-function WorkoutEntry({open, setOpen}) {
+function WorkoutEntry({open, setOpen, date}) {
 
  const exerciseTypes = [
    'Walk',
@@ -27,6 +30,8 @@ function WorkoutEntry({open, setOpen}) {
    'Multisport',
    'Kickboxing'
  ]
+
+
 
  function GridItem({ children }) {
   return (
@@ -82,7 +87,10 @@ function ControlledTextField({ value, setValue, label }) {
   );
 }
 
- function storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes) {
+ function storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes, datetime) {
+  const now = dayjs();
+  const scheduled = dayjs(datetime);
+  const diff = now.diff(scheduled, "minute");
 
   let workouts = localStorage.getItem("workout");
 
@@ -98,6 +106,7 @@ function ControlledTextField({ value, setValue, label }) {
     exerciseType: exerciseType,
     intensity: intensity,
     notes: notes,
+    datetime: datetime,
   };
 
   localStorage.setItem("workouts", JSON.stringify(workouts.concat([newWorkout])));
@@ -108,6 +117,7 @@ function ControlledTextField({ value, setValue, label }) {
  const [exerciseType, setExerciseType] = useState("");
  const [intensity, setIntensity] = useState("");
  const [notes, setNotes] = useState("");
+ const [datetime, setDatetime] = React.useState(date);
 
  return (
   <Dialog open={open}>
@@ -119,7 +129,7 @@ function ControlledTextField({ value, setValue, label }) {
             <ControlledTextField
             value={durationHours}
             setValue={setDurationHours}
-          label="Duration (Hours)"
+            label="Duration (Hours)"
         />
           </GridItem>
 
@@ -174,6 +184,20 @@ function ControlledTextField({ value, setValue, label }) {
            onChange={(e) => setNotes(e.target.value)}
          />
           </GridItem>
+
+          <GridItem>
+              <DateTimePicker
+                label="Time"
+                value={datetime}
+                viewRenderers={{
+                  hours: renderTimeViewClock,
+                  minutes: renderTimeViewClock,
+                }}
+                onChange={(newValue) => setDatetime(newValue)}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+            </GridItem>
+          
         </OuterGrid>
       </Container>
     </DialogContent>
@@ -190,7 +214,7 @@ function ControlledTextField({ value, setValue, label }) {
         variant="contained"
         endIcon={<SendIcon />}
         onClick={() => {
-          storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes);
+          storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes, datetime);
           setOpen(false);
         }}
       >
