@@ -67,15 +67,18 @@ function CalendarView({ setHeader }) {
         </GridItem>
 
         <GridItem margin="8px" md={12}>
-          <MealSummary plannedMeals={plannedMeals} />
+          <MealSummary plannedMeals={plannedMeals} setRefresh={setRefresh} />
         </GridItem>
 
         <GridItem margin="8px" md={12}>
-          <WorkoutSummary plannedWorkouts={plannedWorkouts} />
+          <WorkoutSummary
+            plannedWorkouts={plannedWorkouts}
+            setRefresh={setRefresh}
+          />
         </GridItem>
 
         <GridItem margin="8px" md={12}>
-          <SleepSummary plannedSleep={plannedSleep} />
+          <SleepSummary plannedSleep={plannedSleep} setRefresh={setRefresh} />
         </GridItem>
       </ContainerGrid>
 

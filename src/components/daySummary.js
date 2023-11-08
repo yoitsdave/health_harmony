@@ -5,11 +5,42 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 
-import { Edit as EditIcon } from "@mui/icons-material";
+import { Delete as DeleteIcon } from "@mui/icons-material";
 
 import dayjs from "dayjs";
 
-function MealSummary({ plannedMeals }) {
+function deleteMeal(id, setRefresh) {
+  const newMeals = JSON.parse(localStorage.getItem("meals")).filter((meal) => {
+    return meal.id != id;
+  });
+  localStorage.setItem("meals", JSON.stringify(newMeals));
+
+  setRefresh(1);
+}
+
+function deleteWorkout(id, setRefresh) {
+  const newWorkouts = JSON.parse(localStorage.getItem("workouts")).filter(
+    (workout) => {
+      return workout.id != id;
+    }
+  );
+  localStorage.setItem("workouts", JSON.stringify(newWorkouts));
+
+  setRefresh(1);
+}
+
+function deleteSleep(id, setRefresh) {
+  const newSleeps = JSON.parse(localStorage.getItem("sleeps")).filter(
+    (sleep) => {
+      return sleep.id != id;
+    }
+  );
+  localStorage.setItem("sleeps", JSON.stringify(newSleeps));
+
+  setRefresh(1);
+}
+
+function MealSummary({ plannedMeals, setRefresh }) {
   return (
     <ContainerGrid>
       <GridItem>
@@ -37,10 +68,11 @@ function MealSummary({ plannedMeals }) {
                 <CardActions>
                   <Button
                     variant="contained"
-                    endIcon={<EditIcon />}
-                    onClick={() => alert("edit not supported :(")}
+                    color="error"
+                    endIcon={<DeleteIcon />}
+                    onClick={() => deleteMeal(meal.id, setRefresh)}
                   >
-                    Edit
+                    Delete
                   </Button>
                 </CardActions>
               </Card>
@@ -56,7 +88,7 @@ function MealSummary({ plannedMeals }) {
   );
 }
 
-function WorkoutSummary({ plannedWorkouts }) {
+function WorkoutSummary({ plannedWorkouts, setRefresh }) {
   return (
     <ContainerGrid>
       <GridItem>
@@ -84,10 +116,11 @@ function WorkoutSummary({ plannedWorkouts }) {
                 <CardActions>
                   <Button
                     variant="contained"
-                    endIcon={<EditIcon />}
-                    onClick={() => alert("edit is currently not supported :(")}
+                    color="error"
+                    endIcon={<DeleteIcon />}
+                    onClick={() => deleteWorkout(workout.id, setRefresh)}
                   >
-                    Edit
+                    Delete
                   </Button>
                 </CardActions>
               </Card>
@@ -103,7 +136,7 @@ function WorkoutSummary({ plannedWorkouts }) {
   );
 }
 
-function SleepSummary({ plannedSleep }) {
+function SleepSummary({ plannedSleep, setRefresh }) {
   return (
     <ContainerGrid>
       <GridItem>
@@ -136,10 +169,11 @@ function SleepSummary({ plannedSleep }) {
                 <CardActions>
                   <Button
                     variant="contained"
-                    endIcon={<EditIcon />}
-                    onClick={() => alert("edit is currently not supported :(")}
+                    color="error"
+                    endIcon={<DeleteIcon />}
+                    onClick={() => deleteSleep(sleep.id, setRefresh)}
                   >
-                    Edit
+                    Delete
                   </Button>
                 </CardActions>
               </Card>
