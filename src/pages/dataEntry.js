@@ -153,16 +153,6 @@ function DataEntry({ setHeader }) {
 
     setOpen(false);
 
-<<<<<<< HEAD
-    setName("");
-    setAge("");
-    setFeet("");
-    setInches("");
-    setWeight("");
-    setSex("");
-
-=======
->>>>>>> 20a0cc1 (feat: added local storage changes)
     // Delay showing the alert after the page is reloaded
     setTimeout(() => {
       setShowSuccessAlert(true);
@@ -172,23 +162,22 @@ function DataEntry({ setHeader }) {
     navigate("/");
   };
 
-<<<<<<< HEAD
-  const [name, setName] = React.useState("");
-=======
+
+
+
 
   const [name, setName] =  React.useState(localStorage.getItem('name')|| "");
->>>>>>> 20a0cc1 (feat: added local storage changes)
+
 
   const [age, setAge] = React.useState(localStorage.getItem('age') || "");
   const [inches, setInches] = React.useState(localStorage.getItem('inches') || "");
   const [feet, setFeet] = React.useState(localStorage.getItem('feet') || "");
   const [weight, setWeight] = React.useState(localStorage.getItem('weight') ||"");
 
-<<<<<<< HEAD
-  const [sex, setSex] = React.useState("");
-=======
+
+
   const [sex, setSex] = React.useState(localStorage.getItem('sex') || "");
->>>>>>> 20a0cc1 (feat: added local storage changes)
+
   const handleSexChange = (event) => {
     setSex(event.target.value);
   };
