@@ -14,6 +14,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 
+
 import * as React from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Dialog from '@mui/material/Dialog';
@@ -176,17 +177,6 @@ function DataEntry({ setHeader }) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <OuterGrid>
             <GridItem>
-              {showSuccessAlert && <Slide direction="up" in = {showSuccessAlert} >
-                <Stack sx={{ width: '100%' }} spacing={1}>
-                  <Alert severity="success" variant = "filled" onClose={() => setShowSuccessAlert(false)}>
-                    <AlertTitle>
-                      <strong>Congrats! Your info has been saved!</strong>
-                    </AlertTitle>
-                  </Alert>
-                </Stack>
-              </Slide>}
-            </GridItem>
-            <GridItem>
               <ControlledTextField
                 value={name}
                 setValue={setName}
@@ -283,9 +273,18 @@ function DataEntry({ setHeader }) {
                   </Button>
                 </DialogActions>
               </Dialog>
-              
-              
             </center>
+            </GridItem>
+            <GridItem>
+              {showSuccessAlert && <Slide direction="left" in = {showSuccessAlert} >
+                <Stack sx={{ width: '100%' }} spacing={1}>
+                  <Alert severity="success" variant = "filled" onClose={() => setShowSuccessAlert(false)}>
+                    <AlertTitle>
+                      <strong>Congrats! Your info has been saved!</strong>
+                    </AlertTitle>
+                  </Alert>
+                </Stack>
+              </Slide>}
             </GridItem>
 
           </OuterGrid>
