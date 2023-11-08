@@ -103,9 +103,6 @@ function ControlledTextField({ value, setValue, label }) {
   localStorage.setItem("workouts", JSON.stringify(workouts.concat([newWorkout])));
 }
 
-
-
-
  const [durationHours, setDurationHours] = useState('');
  const [durationMinutes, setDurationMinutes] = useState('');
  const [exerciseType, setExerciseType] = useState("");
