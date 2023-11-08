@@ -16,6 +16,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { BarChart } from '@mui/x-charts/BarChart';
 
+import { Cancel as CancelIcon } from "@mui/icons-material"; // Import CancelIcon
 import dayjs from "dayjs";
 import * as React from "react";
 
@@ -129,13 +130,15 @@ function VisualSummary() {
           <p>Time : {range}</p>
           <p>Category: {category}</p>
 
-          {/* Add a "Cancel" button at the bottom of the dialog */}
+          {/* Use a "Cancel" button with the same style as the "SleepEntry" component */}
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             onClick={handleCancel}
+            endIcon={<CancelIcon />} // Use CancelIcon
+            style={{ marginLeft: 400 }} 
           >
-            Cancel
+            Close
           </Button>
         </DialogContent>
       </Dialog>
