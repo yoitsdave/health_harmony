@@ -74,6 +74,7 @@ function CalendarView({ setHeader }) {
       <WorkoutEntryDialogue
         open={workoutEntryOpen}
         setOpen={setWorkoutEntryOpen}
+        date={selectedDate}
       />
 
       <SleepEntryDialogue open={sleepEntryOpen} setOpen={setSleepEntryOpen} />

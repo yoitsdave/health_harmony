@@ -5,11 +5,11 @@ import { Tabs, Tab } from '@mui/material';
 
 import { Add as AddIcon } from "@mui/icons-material";
 
-import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 
 import dayjs from "dayjs";
+
 import * as React from "react";
 
 
@@ -55,10 +55,11 @@ function GridItem({ children }) {
 
 
 
-function storeSleep(start, end, quality) {
-  const formatStart = start.format("h:mm A");
-  const formatEnd = end.format("h:mm A");
- 
+function storeSleep(start, end, quality, datetime) {
+  const now = dayjs();
+  const scheduled = dayjs(datetime);
+  const diff = now.diff(scheduled, "minute");
+  
   let sleeps = localStorage.getItem("sleeps");
 
   if (sleeps == null || sleeps == "") {
@@ -70,7 +71,8 @@ function storeSleep(start, end, quality) {
     id: sleeps.length,
     start: start,
     end: end,
-    quality: quality
+    quality: quality,
+    datetime: datetime,
   };
 
   localStorage.setItem("sleeps", JSON.stringify(sleeps.concat([newSleep])));
@@ -79,10 +81,11 @@ function storeSleep(start, end, quality) {
 
 
 
-function SleepEntry({open, setOpen}) {
+function SleepEntry({open, setOpen, date}) {
    const [start, setStart] = React.useState(dayjs());
    const [end, setEnd] = React.useState(dayjs());
    const [quality, setQuality] = React.useState("");
+   const [datetime, setDatetime] = React.useState(date);
 
 
    return(
@@ -117,6 +120,19 @@ function SleepEntry({open, setOpen}) {
                label="Sleep Quality (1-10)"
              />
               </GridItem>
+
+              <GridItem>
+              <DateTimePicker
+                label="Current Time"
+                value={datetime}
+                viewRenderers={{
+                  hours: renderTimeViewClock,
+                  minutes: renderTimeViewClock,
+                }}
+                onChange={(newValue) => setDatetime(newValue)}
+                slotProps={{ textField: { fullWidth: true } }}
+              />
+            </GridItem>
             </InnerGrid>
         </Container>
       </DialogContent>
