@@ -4,6 +4,7 @@ import SleepEntry from "./pages/sleepEntry.js";
 import WorkoutEntry from "./pages/workoutEntry.js";
 import DataEntry from "./pages/dataEntry.js";
 import Homepage from "./pages/homepage.js";
+import Logout from "./pages/logout.js";
 
 import AppBar from "./components/appBar.js";
 
@@ -34,14 +35,7 @@ function App() {
               }
             />
 
-            <Route
-              path="/reset"
-              element={
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                  Logout is currently unsupported :(
-                </Typography>
-              }
-            />
+            <Route path="/reset" element={<Logout />} />
 
             <Route
               path="/personaldataentry"
