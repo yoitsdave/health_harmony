@@ -1,6 +1,5 @@
 import {
   Box,
-  Fab,
   Grid,
   SpeedDial,
   SpeedDialAction,
@@ -14,6 +13,9 @@ import {
   Bedtime as BedtimeIcon,
 } from "@mui/icons-material";
 
+
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import PlanningDateCalendar from "../components/planningDateCalendar.js";
 import FoodEntryDialogue from "../components/foodEntryDialogue.js";
 import WorkoutEntryDialogue from "../pages/workoutEntry.js";
@@ -30,6 +32,7 @@ import * as React from "react";
 
 import dayjs from "dayjs";
 
+
 function CalendarView({ setHeader }) {
   React.useEffect(() => {
     setHeader("Health Harmony");
@@ -44,9 +47,33 @@ function CalendarView({ setHeader }) {
   const [workoutEntryOpen, setWorkoutEntryOpen] = React.useState(false);
   const [sleepEntryOpen, setSleepEntryOpen] = React.useState(false);
 
+
   const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
 
   const [refresh, setRefresh] = React.useState(1);
+
+  const [redirectOpen, setRedirectOpen] = React.useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
+  var value;
+  var answer;
+  value = localStorage.getItem("dataEntered")
+  if(value === "closed" || value === null){
+    answer = false
+  } else {
+    answer = true
+  }
+  const [open, setOpen] = React.useState(answer);
+  console.log(open)
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    localStorage.setItem("dataEntered", "closed");
+
+    setOpen(false);
+  };
+
 
   return (
     <Box sx={{ height: "90vh", overflow: "auto" }}>
@@ -136,6 +163,14 @@ function CalendarView({ setHeader }) {
           tooltipTitle="Plan or Record Sleep"
         />
       </SpeedDial>
+      
+      <Snackbar open = {open} onClose={handleClose}> 
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Your Health Information has been saved!
+        </Alert>
+      </Snackbar>
+      
+      
     </Box>
   );
 }

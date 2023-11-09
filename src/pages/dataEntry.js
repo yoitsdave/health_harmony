@@ -2,7 +2,6 @@ import {
   MenuItem,
   TextField,
   Button,
-  Box,
   InputLabel,
   Select,
   FormControl,
@@ -11,11 +10,10 @@ import SendIcon from "@mui/icons-material/Send";
 import { Container, Grid, Fab, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import { Add as AddIcon } from "@mui/icons-material";
 
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
+
 
 import dayjs from "dayjs";
 
@@ -25,7 +23,7 @@ import Stack from "@mui/material/Stack";
 
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
-import Snackbar from "@mui/material/Snackbar";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -41,9 +39,6 @@ function GridItem({ children }) {
   );
 }
 
-function onSubmit() {
-  return <div></div>;
-}
 
 function OuterGrid({ children }) {
   return (
@@ -109,26 +104,6 @@ function ControlledNumberField({ value, setValue, label }) {
   );
 }
 
-function storeInfo(name, age, inches, feet, weight, sex) {
-  const message =
-    "Name: " +
-    name +
-    "\nAge : " +
-    age +
-    "\nHeight: " +
-    feet +
-    "'" +
-    inches +
-    "\nSex: Male\n" +
-    "Weight: " +
-    weight;
-
-  if (window.confirm(message) == true) {
-    window.location.reload();
-    return <Alert severity="success">This is a success message!</Alert>;
-  }
-}
-
 function DataEntry({ setHeader }) {
   const [open, setOpen] = React.useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
@@ -157,7 +132,8 @@ function DataEntry({ setHeader }) {
     setTimeout(() => {
       setShowSuccessAlert(true);
     }, 1000);
-    console.log(localStorage.getItem("name"));
+    
+    localStorage.setItem("dataEntered", "notclosed");
 
     navigate("/");
   };
@@ -177,6 +153,8 @@ function DataEntry({ setHeader }) {
 
 
   const [sex, setSex] = React.useState(localStorage.getItem('sex') || "");
+ 
+
 
   const handleSexChange = (event) => {
     setSex(event.target.value);
@@ -224,6 +202,7 @@ function DataEntry({ setHeader }) {
                   value={inches}
                   setValue={setInches}
                   label="Height (Inches)"
+                  inputProps={{ inputProps: {min: 10, max:100}}}
                 />
               </GridItem>
             </InnerGrid>
