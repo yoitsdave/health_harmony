@@ -27,27 +27,28 @@ import dayjs from "dayjs";
 import * as React from "react";
 
 function GridItem({ children }) {
-  return (
-    <Grid item sm={12}>
-      {children}
-    </Grid>
-  );
-}
-function InnerGrid({ children }) {
-  return (
-    <Grid
-      item
-      container
-      sm={12}
-      spacing={1}
-      direction="column"
-      justifyContent="flex-start"
-      alignItems="stretch"
-    >
-      {children}
-    </Grid>
-  );
-}
+   return (
+     <Grid item sm={12}>
+       {children}
+     </Grid>
+   );
+ }
+  function InnerGrid({ children }) {
+   return (
+     <Grid
+       item
+       container
+       sm={12}
+       spacing={1}
+       direction="column"
+       justifyContent="flex-start"
+       alignItems="stretch"
+     >
+       {children}
+     </Grid>
+   );
+ }
+
 
 function ControlledTextField({ value, setValue, label }) {
   return (
@@ -65,11 +66,13 @@ function ControlledTextField({ value, setValue, label }) {
   );
 }
 
+
+
 function storeSleep(start, end, quality, datetime) {
   const now = dayjs();
   const scheduled = dayjs(datetime);
   const diff = now.diff(scheduled, "minute");
-
+  
   let sleeps = localStorage.getItem("sleeps");
 
   if (sleeps == null || sleeps == "") {
@@ -82,22 +85,24 @@ function storeSleep(start, end, quality, datetime) {
     start: start,
     end: end,
     quality: quality,
-    datetime: datetime,
   };
 
   localStorage.setItem("sleeps", JSON.stringify(sleeps.concat([newSleep])));
 }
 
-function SleepEntry({ open, setOpen, date, setRefresh }) {
-  const [start, setStart] = React.useState(dayjs());
-  const [end, setEnd] = React.useState(dayjs());
-  const [quality, setQuality] = React.useState("");
-  const [datetime, setDatetime] = React.useState(date);
+
+
+
+function SleepEntry({open, setOpen, date}) {
+   const [start, setStart] = React.useState(dayjs());
+   const [end, setEnd] = React.useState(dayjs());
+   const [quality, setQuality] = React.useState("");
+   const [datetime, setDatetime] = React.useState(date);
 
   return (
     <Dialog open={open}>
       <DialogTitle> Log Sleep </DialogTitle>
-      <DialogContent>
+      <DialogContent style={{paddingTop: '20px'}}>
         <Container maxWidth="xs">
           <GridItem>
             <DateTimePicker
@@ -126,7 +131,7 @@ function SleepEntry({ open, setOpen, date, setRefresh }) {
               />
             </GridItem>
 
-            <GridItem>
+              <GridItem>
               <DateTimePicker
                 label="Current Time"
                 value={datetime}
@@ -138,7 +143,7 @@ function SleepEntry({ open, setOpen, date, setRefresh }) {
                 slotProps={{ textField: { fullWidth: true } }}
               />
             </GridItem>
-          </InnerGrid>
+            </InnerGrid>
         </Container>
       </DialogContent>
 
