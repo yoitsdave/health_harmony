@@ -112,7 +112,7 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
     let workouts = localStorage.getItem("workouts");
 
     if (workouts == null || workouts == "") {
-      localStorage.setItem("meals", JSON.stringify([]));
+      localStorage.setItem("workouts", JSON.stringify([]));
     }
     workouts = JSON.parse(localStorage.getItem("workouts"));
 
@@ -142,7 +142,7 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
   return (
     <Dialog open={open}>
       <DialogTitle> Add Workout </DialogTitle>
-      <DialogContent style={{paddingTop:"20px"}}>
+      <DialogContent style={{ paddingTop: "20px" }}>
         <Container maxWidth="xs">
           <OuterGrid>
             <GridItem>
@@ -221,27 +221,34 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
         </Container>
       </DialogContent>
 
-    <DialogActions>
-      <Button
-        variant="contained"
-        endIcon={<CancelIcon />}
-        onClick={() => setOpen(false)}
-      >
-        Cancel
-      </Button>
-      <Button
-        variant="contained"
-        endIcon={<SendIcon />}
-        onClick={() => {
-          storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes, datetime);
-          setOpen(false);
-        }}
-      >
-        Add Workout
-      </Button>
-    </DialogActions>
-  </Dialog>
-);
+      <DialogActions>
+        <Button
+          variant="contained"
+          endIcon={<CancelIcon />}
+          onClick={() => setOpen(false)}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={() => {
+            storeWorkout(
+              durationHours,
+              durationMinutes,
+              exerciseType,
+              intensity,
+              notes,
+              datetime
+            );
+            setOpen(false);
+          }}
+        >
+          Add Workout
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
 
 export default WorkoutEntry;

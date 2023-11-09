@@ -55,7 +55,7 @@ function MealSummary({ plannedMeals, setRefresh }) {
                 <CardContent>
                   <Typography gutterBottom>{meal.name}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {dayjs(meal.datetime).format("h:m a")}
+                    {dayjs(meal.datetime).format("hh:mm a")}
                   </Typography>
                   <Typography variant="body2">
                     Calories: {meal.calories} <br />
@@ -89,6 +89,9 @@ function MealSummary({ plannedMeals, setRefresh }) {
 }
 
 function WorkoutSummary({ plannedWorkouts, setRefresh }) {
+  var duration = require("dayjs/plugin/duration");
+  dayjs.extend(duration);
+
   return (
     <ContainerGrid>
       <GridItem>
@@ -103,10 +106,13 @@ function WorkoutSummary({ plannedWorkouts, setRefresh }) {
                 <CardContent>
                   <Typography gutterBottom>{workout.exerciseType}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {dayjs(workout.datetime).format("h:m a")}
+                    {dayjs(workout.datetime).format("hh:mm a")}
                   </Typography>
                   <Typography variant="body2">
-                    Duration: {workout.durationHours}:{workout.durationMinutes}
+                    {"Duration: "}
+                    {dayjs
+                      .duration(workout.durationMinutes, "minutes")
+                      .format("H:mm")}
                     <br />
                     Intensity: {workout.intensity} <br />
                     Notes: {workout.notes} <br />

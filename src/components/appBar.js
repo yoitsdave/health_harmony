@@ -31,7 +31,6 @@ export default function MenuAppBar({ children, page }) {
   const location = useLocation();
 
   React.useEffect(() => {
-    console.log(location.pathname);
     if (
       localStorage.getItem("name") === null &&
       location.pathname != "/personaldataentry"
