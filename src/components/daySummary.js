@@ -55,7 +55,7 @@ function MealSummary({ plannedMeals, setRefresh }) {
                 <CardContent>
                   <Typography gutterBottom>{meal.name}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {dayjs(meal.datetime).format("hh:mm a")}
+                    {dayjs(meal.datetime).format("h:m a")}
                   </Typography>
                   <Typography variant="body2">
                     Calories: {meal.calories} <br />
@@ -103,7 +103,7 @@ function WorkoutSummary({ plannedWorkouts, setRefresh }) {
                 <CardContent>
                   <Typography gutterBottom>{workout.exerciseType}</Typography>
                   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {dayjs(workout.datetime).format("hh:mm a")}
+                    {dayjs(workout.datetime).format("h:m a")}
                   </Typography>
                   <Typography variant="body2">
                     Duration: {workout.durationHours}:{workout.durationMinutes}
@@ -159,9 +159,9 @@ function SleepSummary({ plannedSleep, setRefresh }) {
                     Quality: {sleep.quality}
                   </Typography>
                   <Typography variant="body2">
-                    Start: {dayjs(sleep.start).format("hh:mm a")}
+                    Start: {dayjs(sleep.start).format("h:m a")}
                     <br />
-                    End: {dayjs(sleep.end).format("hh:mm a")}
+                    End: {dayjs(sleep.end).format("h:m a")}
                     <br />
                   </Typography>
                 </CardContent>

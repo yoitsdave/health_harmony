@@ -1,9 +1,11 @@
 import {
   Box,
   Fab,
+  Grid,
   SpeedDial,
   SpeedDialAction,
   SpeedDialIcon,
+  Typography,
 } from "@mui/material";
 import {
   Add as AddIcon,
@@ -66,6 +68,12 @@ function CalendarView({ setHeader }) {
             refresh={refresh}
             setRefresh={setRefresh}
           />
+        </GridItem>
+
+        <GridItem margin="8px" md={12}>
+          <Typography variant="h4">
+            {dayjs(selectedDate).format("dddd, MMMM D")}
+          </Typography>
         </GridItem>
 
         <GridItem margin="8px" md={12}>
