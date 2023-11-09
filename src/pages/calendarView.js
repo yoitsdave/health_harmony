@@ -49,6 +49,8 @@ function CalendarView({ setHeader }) {
 
   const [redirectOpen, setRedirectOpen] = React.useState(false);
 
+  const [speedDialOpen, setSpeedDialOpen] = React.useState(false);
+
   const [refresh, setRefresh] = React.useState(1);
 
   return (
@@ -106,8 +108,13 @@ function CalendarView({ setHeader }) {
 
       <SpeedDial
         sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
+        icon={<SpeedDialIcon openIcon={<AddIcon />} />}
         ariaLabel="Plan / Record"
+        open={speedDialOpen}
+        onClick={(event) => setSpeedDialOpen(true)}
+        onFocus={(event) => setSpeedDialOpen(true)}
+        onMouseEnter={(event) => setSpeedDialOpen(true)}
+        onClose={(event) => setSpeedDialOpen(false)}
       >
         <SpeedDialAction
           key="meal"
