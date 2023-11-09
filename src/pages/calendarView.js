@@ -165,8 +165,8 @@ function CalendarView({ setHeader }) {
       </SpeedDial>
       
       <Snackbar open = {open} onClose={handleClose}> 
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Your Health Information has been saved!
+        <Alert onClose={handleClose} severity="success" sx={{ width: '60%' }}>
+          Information Saved!
         </Alert>
       </Snackbar>
       
