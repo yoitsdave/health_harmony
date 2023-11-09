@@ -131,18 +131,7 @@ function SleepEntry({open, setOpen, date, setRefresh}) {
               />
             </GridItem>
 
-              <GridItem>
-              <DateTimePicker
-                label="Current Time"
-                value={datetime}
-                viewRenderers={{
-                  hours: renderTimeViewClock,
-                  minutes: renderTimeViewClock,
-                }}
-                onChange={(newValue) => setDatetime(newValue)}
-                slotProps={{ textField: { fullWidth: true } }}
-              />
-            </GridItem>
+             
             </InnerGrid>
         </Container>
       </DialogContent>
