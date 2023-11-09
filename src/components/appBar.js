@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -7,13 +7,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import SettingsIcon from "@mui/icons-material/Settings";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -24,20 +19,33 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+import RedirectDialogue from "../components/redirectDialogue.js";
+
 export default function MenuAppBar({ children, page }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [menuShown, setMenuShown] = React.useState(false);
+  const [redirectOpen, setRedirectOpen] = React.useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    console.log(location.pathname);
+    if (
+      localStorage.getItem("name") === null &&
+      location.pathname != "/personaldataentry"
+    ) {
+      setRedirectOpen(true);
+    } else if (location.pathname == "/personaldataentry") {
+      setRedirectOpen(false);
+    }
+  });
 
   const handleMenu = (event) => {
     event.preventDefault();
-    setAnchorEl(event.currentTarget);
     setMenuShown(true);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
     setMenuShown(false);
   };
 
@@ -51,6 +59,8 @@ export default function MenuAppBar({ children, page }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <RedirectDialogue open={redirectOpen} setOpen={setRedirectOpen} />
+
       <AppBar position="static" style={{ margin: 0 }} disableGutters={true}>
         <Toolbar disableGutters={true} variant="dense">
           <IconButton
