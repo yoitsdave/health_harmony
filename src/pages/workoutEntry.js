@@ -142,7 +142,7 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
   return (
     <Dialog open={open}>
       <DialogTitle> Add Workout </DialogTitle>
-      <DialogContent>
+      <DialogContent style={{paddingTop:"20px"}}>
         <Container maxWidth="xs">
           <OuterGrid>
             <GridItem>
