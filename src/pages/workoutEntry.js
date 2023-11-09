@@ -105,6 +105,12 @@ function storeWorkout(
 ) {
   const now = dayjs();
   const scheduled = dayjs(datetime);
+  const diff = now.diff(scheduled, "minute");
+  let confirmed = false;
+
+  if (diff >= -1) {
+    confirmed = true;
+  }
 
   let workouts = localStorage.getItem("workouts");
 
@@ -121,6 +127,7 @@ function storeWorkout(
     intensity: intensity,
     notes: notes,
     datetime: datetime,
+    confirmed: confirmed,
   };
 
   localStorage.setItem(

@@ -34,7 +34,11 @@ import dayjs from "dayjs";
 function CalendarView({ setHeader }) {
   React.useEffect(() => {
     setHeader("Health Harmony");
-  });
+  }, [
+    localStorage.getItem("meals"),
+    localStorage.getItem("workouts"),
+    localStorage.getItem("sleeps"),
+  ]);
 
   const [selectedDate, setSelectedDate] = React.useState(dayjs());
   const [plannedMeals, setPlannedMeals] = React.useState([]);

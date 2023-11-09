@@ -121,7 +121,11 @@ function PlanningDateCalendar({
 
       setRefresh(0);
     }
-  });
+  }, [
+    localStorage.getItem("meals"),
+    localStorage.getItem("workouts"),
+    localStorage.getItem("sleeps"),
+  ]);
 
   const handleMonthChange = (date) => {
     return null;

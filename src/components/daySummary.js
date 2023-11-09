@@ -62,6 +62,7 @@ function MealSummary({ plannedMeals, setRefresh }) {
                     Protein: {meal.protein} <br />
                     Carbs: {meal.carbs} <br />
                     Fat: {meal.fat} <br />
+                    Confirmed: {meal.confirmed.toString()}
                   </Typography>
                 </CardContent>
 
@@ -116,6 +117,7 @@ function WorkoutSummary({ plannedWorkouts, setRefresh }) {
                     <br />
                     Intensity: {workout.intensity} <br />
                     Notes: {workout.notes} <br />
+                    Confirmed: {workout.confirmed.toString()}
                   </Typography>
                 </CardContent>
 
@@ -169,6 +171,7 @@ function SleepSummary({ plannedSleep, setRefresh }) {
                     <br />
                     End: {dayjs(sleep.end).format("h:m a")}
                     <br />
+                    Confirmed: {sleep.confirmed.toString()}
                   </Typography>
                 </CardContent>
 

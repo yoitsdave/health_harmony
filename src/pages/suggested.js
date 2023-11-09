@@ -76,6 +76,7 @@ function WorkoutCard({
               intensity: intensity,
               notes: "Suggested workout",
               datetime: dayjs(),
+              confirmed: false,
             };
             localStorage.setItem(
               "workouts",
