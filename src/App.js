@@ -4,6 +4,8 @@ import Homepage from "./pages/homepage.js";
 import Logout from "./pages/logout.js";
 import Notifications from "./pages/notifs.js";
 import Error404 from "./pages/error404.js";
+import Suggested from "./pages/suggested.js";
+import Stopwatch from "./pages/stopwatch.js";
 
 import AppBar from "./components/appBar.js";
 
@@ -37,11 +39,24 @@ function App() {
               element={<DataEntry setHeader={setHeader} />}
             />
 
-            <Route path="/summaryplot" element={<VisualSummary setHeader={setHeader} />} />
+            <Route
+              path="/summaryplot"
+              element={<VisualSummary setHeader={setHeader} />}
+            />
 
             <Route
               path="/calendarview"
               element={<CalendarView setHeader={setHeader} />}
+            />
+
+            <Route
+              path="/stopwatch"
+              element={<Stopwatch setHeader={setHeader} />}
+            />
+
+            <Route
+              path="/suggested"
+              element={<Suggested setHeader={setHeader} />}
             />
 
             <Route path="/" element={<Homepage setHeader={setHeader} />} />

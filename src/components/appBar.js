@@ -18,6 +18,8 @@ import ListItemText from "@mui/material/ListItemText";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AutoGraphIcon from "@mui/icons-material/AutoGraph";
 import LogoutIcon from "@mui/icons-material/Logout";
+import TimerIcon from "@mui/icons-material/Timer";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 
 import RedirectDialogue from "../components/redirectDialogue.js";
 
@@ -100,6 +102,22 @@ export default function MenuAppBar({ children, page }) {
                   <ListItemText primary="Personal Info" />
                 </ListItemButton>
               </ListItem>
+              <ListItem key="suggested" disablePadding>
+                <ListItemButton onClick={handleLink("suggested")}>
+                  <ListItemIcon>
+                    <AutoFixHighIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Exercise Suggestions" />
+                </ListItemButton>
+              </ListItem>
+              <ListItem key="stopwatch" disablePadding>
+                <ListItemButton onClick={handleLink("stopwatch")}>
+                  <ListItemIcon>
+                    <TimerIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Stopwatch" />
+                </ListItemButton>
+              </ListItem>
               <ListItem key="summaryplot" disablePadding>
                 <ListItemButton onClick={handleLink("summaryplot")}>
                   <ListItemIcon>
@@ -116,6 +134,7 @@ export default function MenuAppBar({ children, page }) {
                   <ListItemText primary="Notifications" />
                 </ListItemButton>
               </ListItem>
+
               <ListItem key="reset" disablePadding>
                 <ListItemButton onClick={handleLink("reset")}>
                   <ListItemIcon>
