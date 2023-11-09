@@ -62,8 +62,8 @@ export default function MenuAppBar({ children, page }) {
     <Box sx={{ flexGrow: 1 }}>
       <RedirectDialogue open={redirectOpen} setOpen={setRedirectOpen} />
 
-      <AppBar position="static" style={{ margin: 0 }} disableGutters={true}>
-        <Toolbar disableGutters={true} variant="dense">
+      <AppBar position="static" style={{ margin: 0 }}>
+        <Toolbar variant="dense">
           <IconButton
             size="large"
             edge="start"
@@ -75,15 +75,7 @@ export default function MenuAppBar({ children, page }) {
             <MenuIcon />
           </IconButton>
 
-          <Drawer
-            anchor={"left"}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            open={menuShown}
-            onClose={handleClose}
-          >
+          <Drawer anchor={"left"} open={menuShown} onClose={handleClose}>
             <List>
               <ListItem key="homepage" disablePadding>
                 <ListItemButton onClick={handleLink("")}>

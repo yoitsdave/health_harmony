@@ -50,7 +50,7 @@ function MealSummary({ plannedMeals, setRefresh }) {
       {plannedMeals.length > 0 ? (
         plannedMeals.map((meal) => {
           return (
-            <GridItem md={6}>
+            <GridItem md={6} key={meal.id}>
               <Card variant="outlined">
                 <CardContent>
                   <Typography gutterBottom>{meal.name}</Typography>
@@ -101,7 +101,7 @@ function WorkoutSummary({ plannedWorkouts, setRefresh }) {
       {plannedWorkouts.length > 0 ? (
         plannedWorkouts.map((workout) => {
           return (
-            <GridItem md={6}>
+            <GridItem md={6} key={workout.id}>
               <Card variant="outlined">
                 <CardContent>
                   <Typography gutterBottom>{workout.exerciseType}</Typography>
@@ -152,7 +152,7 @@ function SleepSummary({ plannedSleep, setRefresh }) {
       {plannedSleep.length > 0 ? (
         plannedSleep.map((sleep) => {
           return (
-            <GridItem md={6}>
+            <GridItem md={6} key={sleep.id}>
               <Card variant="outlined">
                 <CardContent>
                   <Typography gutterBottom>
