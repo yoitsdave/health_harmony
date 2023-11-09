@@ -221,35 +221,27 @@ function WorkoutEntry({ open, setOpen, date, setRefresh }) {
         </Container>
       </DialogContent>
 
-      <DialogActions>
-        <Button
-          variant="contained"
-          endIcon={<CancelIcon />}
-          onClick={() => setOpen(false)}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          endIcon={<SendIcon />}
-          onClick={() => {
-            storeWorkout(
-              durationHours,
-              durationMinutes,
-              exerciseType,
-              intensity,
-              notes,
-              datetime
-            );
-            setOpen(false);
-            setRefresh(1);
-          }}
-        >
-          Add Workout
-        </Button>
-      </DialogActions>
-    </Dialog>
-  );
+    <DialogActions>
+      <Button
+        variant="contained"
+        endIcon={<CancelIcon />}
+        onClick={() => setOpen(false)}
+      >
+        Cancel
+      </Button>
+      <Button
+        variant="contained"
+        endIcon={<SendIcon />}
+        onClick={() => {
+          storeWorkout(durationHours, durationMinutes, exerciseType, intensity, notes, datetime);
+          setOpen(false);
+        }}
+      >
+        Add Workout
+      </Button>
+    </DialogActions>
+  </Dialog>
+);
 }
 
 export default WorkoutEntry;

@@ -93,7 +93,7 @@ function storeSleep(start, end, quality, datetime) {
 
 
 
-function SleepEntry({open, setOpen, date}) {
+function SleepEntry({open, setOpen, date, setRefresh}) {
    const [start, setStart] = React.useState(dayjs());
    const [end, setEnd] = React.useState(dayjs());
    const [quality, setQuality] = React.useState("");
@@ -159,7 +159,7 @@ function SleepEntry({open, setOpen, date}) {
           variant="contained"
           endIcon={<SendIcon />}
           onClick={() => {
-            storeSleep(start, end, quality);
+            storeSleep(start, end, quality, setRefresh);
             setOpen(false);
             setRefresh(1);
           }}
