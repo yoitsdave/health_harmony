@@ -30,8 +30,8 @@ function FoodEntryDialogue({ open, setOpen, date }) {
 
       <DialogContent>
         <Typography variant="subtitle1">
-          Welcome to HealthHarmony! We need some data from you to get started on
-          your health journey. Don't worry - this isn't shared with any
+          Welcome to Health Harmony! We need some data from you to get started
+          on your health journey. Don't worry - this isn't shared with any
           advertisers. As a matter of fact, it isn't even shared with us!
         </Typography>
       </DialogContent>

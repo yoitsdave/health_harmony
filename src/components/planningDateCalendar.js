@@ -9,8 +9,6 @@ import * as React from "react";
 import dayjs from "dayjs";
 
 function ServerDay({
-  foodHighlightedDays,
-  workoutHighlightedDays,
   outsideCurrentMonth,
   day,
   meals,
@@ -35,12 +33,12 @@ function ServerDay({
   });
   const dayOfSleeps = sleeps.filter((sleep) => {
     return (
-      dayjs(sleep.datetime).date() == day.date() &&
-      dayjs(sleep.datetime).month() == day.month()
+      dayjs(sleep.start).date() == day.date() &&
+      dayjs(sleep.start).month() == day.month()
     );
   });
 
-  let numPlans = dayOfMeals.length + dayOfWorkouts.length;
+  let numPlans = dayOfMeals.length + dayOfWorkouts.length + dayOfSleeps.length;
   if (outsideCurrentMonth) {
     numPlans = 0;
   }
@@ -77,11 +75,6 @@ function PlanningDateCalendar({
   setRefresh,
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [foodHighlightedDays, setFoodHighlightedDays] = React.useState([]);
-  const [workoutHighlightedDays, setWorkoutHighlightedDays] = React.useState(
-    []
-  );
-  const [sleepHighlightedDays, setSleepHighlightedDays] = React.useState([]);
 
   let tempMeals = localStorage.getItem("meals");
   let tempWorkouts = localStorage.getItem("workouts");
@@ -105,20 +98,20 @@ function PlanningDateCalendar({
     if (refresh == 1) {
       const todayMeals = meals.filter((meal) => {
         return (
-          dayjs(meal.datetime).date() == dayjs().date() &&
-          dayjs(meal.datetime).month() == dayjs().month()
+          dayjs(meal.datetime).date() == dayjs(selectedDate).date() &&
+          dayjs(meal.datetime).month() == dayjs(selectedDate).month()
         );
       });
       const todayWorkouts = workouts.filter((workout) => {
         return (
-          dayjs(workout.datetime).date() == dayjs().date() &&
-          dayjs(workout.datetime).month() == dayjs().month()
+          dayjs(workout.datetime).date() == dayjs(selectedDate).date() &&
+          dayjs(workout.datetime).month() == dayjs(selectedDate).month()
         );
       });
       const todaySleeps = sleeps.filter((sleep) => {
         return (
-          dayjs(sleep.start).date() == dayjs().date() &&
-          dayjs(sleep.start).month() == dayjs().month()
+          dayjs(sleep.start).date() == dayjs(selectedDate).date() &&
+          dayjs(sleep.start).month() == dayjs(selectedDate).month()
         );
       });
 
@@ -130,32 +123,8 @@ function PlanningDateCalendar({
     }
   });
 
-  const fetchHighlightedDays = () => {
-    setFoodHighlightedDays(
-      meals.map((meal) => {
-        return dayjs(meal.datetime).date();
-      })
-    );
-    setWorkoutHighlightedDays(
-      workouts.map((workout) => {
-        return dayjs(workout.datetime).date();
-      })
-    );
-    setSleepHighlightedDays(
-      sleeps.map((sleep) => {
-        return dayjs(sleep.start).date();
-      })
-    );
-    setIsLoading(false);
-  };
-
-  React.useEffect(() => {
-    fetchHighlightedDays(dayjs());
-  });
-
   const handleMonthChange = (date) => {
-    setIsLoading(true);
-    fetchHighlightedDays(date);
+    return null;
   };
 
   return (
@@ -171,8 +140,6 @@ function PlanningDateCalendar({
         }}
         slotProps={{
           day: {
-            foodHighlightedDays,
-            workoutHighlightedDays,
             meals,
             workouts,
             sleeps,
